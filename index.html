@@ -791,7 +791,34 @@
     let configRecords = {};
     let pendingAction = null;
     let editingRecord = null;
-
+// --- BYPASS UNTUK MENCEGAH ERROR DATA SDK ---
+    if (typeof window.dataSdk === 'undefined') {
+      console.log("Data SDK asli tidak ditemukan, menggunakan sistem lokal...");
+      window.dataSdk = {
+        init: async (config) => { 
+          if(config.onDataChanged) config.onDataChanged(records); 
+          return {isOk: true}; 
+        },
+        create: async (r) => { 
+          r.__backendId = Date.now().toString() + Math.random().toString(36).substr(2, 5); 
+          records.push(r); 
+          if(typeof renderAll === 'function') renderAll(); 
+          return {isOk: true}; 
+        },
+        update: async (r) => { 
+          const i = records.findIndex(x => x.__backendId === r.__backendId); 
+          if(i > -1) records[i] = r; 
+          if(typeof renderAll === 'function') renderAll(); 
+          return {isOk: true}; 
+        },
+        delete: async (r) => { 
+          records = records.filter(x => x.__backendId !== r.__backendId); 
+          if(typeof renderAll === 'function') renderAll(); 
+          return {isOk: true}; 
+        }
+      };
+    }
+    // --------------------------------------------
     const members = () => records.filter(r => r.record_type === "member");
     const attendances = () => records.filter(r => r.record_type === "attendance");
     const visits = () => records.filter(r => r.record_type === "visit");
