@@ -1170,7 +1170,7 @@
       $("member-search").oninput = renderMembers;
       $("member-commission-filter").onchange = renderMembers;
 
-      // 1. FORM ANGGOTA BARU DIPERBARUI (ANTI-FREEZE)
+     // 1. FORM ANGGOTA BARU DIPERBARUI
       $("member-form").onsubmit = async e => {
         e.preventDefault();
         const btn = $("member-save"); btn.disabled = true;
@@ -1178,20 +1178,23 @@
           const r = blankRecord("member");
           Object.assign(r,{member_name:$("m-name").value.trim(),commission:$("m-commission").value,phone:$("m-phone").value.trim(),address:$("m-address").value.trim(),membership_status:$("m-status").value,notes:$("m-notes").value.trim(),join_date:today()});
           
+          // FOTOKOPI DATA BERSIH SEBELUM MASUK SISTEM
+          const dataBersih = JSON.parse(JSON.stringify(r));
+
           const result = editingRecord && editingRecord.record_type === "member" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
           
           if(result.isOk){ 
-            if(!editingRecord) saveToSheetDB(r); // Kirim ke SheetDB di latar belakang
+            if(!editingRecord) setTimeout(() => saveToSheetDB(dataBersih), 500); // Kirim fotokopi ke Google Sheets
             closeModal("member-modal"); showToast(); await logActivity("Menambahkan anggota",r.member_name); 
           }
         } catch(err) {
-          console.error(err); alert("Terjadi kesalahan saat menyimpan data.");
+          alert("Error simpan anggota: " + err.message);
         } finally {
           editingRecord = null; btn.disabled = false;
         }
       };
 
-      // 2. FORM KEHADIRAN DIPERBARUI (ANTI-FREEZE)
+      // 2. FORM KEHADIRAN DIPERBARUI
       $("attendance-form").onsubmit = async e => {
         e.preventDefault();
         const btn = $("attendance-save"); btn.disabled = true;
@@ -1199,20 +1202,23 @@
           const r = blankRecord("attendance");
           Object.assign(r,{member_name:"Kehadiran keseluruhan",commission:$("a-service").value,visitor_name:$("a-service").value,attendance_date:$("a-date").value,attendance_count:Number($("a-count").value),present:true,notes:$("a-evaluation").value.trim()});
           
+          // FOTOKOPI DATA BERSIH SEBELUM MASUK SISTEM
+          const dataBersih = JSON.parse(JSON.stringify(r));
+
           const result = editingRecord && editingRecord.record_type === "attendance" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
           
           if(result.isOk){ 
-            if(!editingRecord) saveToSheetDB(r); // Kirim ke SheetDB di latar belakang
+            if(!editingRecord) setTimeout(() => saveToSheetDB(dataBersih), 500); // Kirim fotokopi ke Google Sheets
             closeModal("attendance-modal"); showToast(); await logActivity("Mencatat kehadiran",r.member_name); 
           }
         } catch(err) {
-          console.error(err); alert("Terjadi kesalahan saat menyimpan data.");
+          alert("Error simpan kehadiran: " + err.message);
         } finally {
           editingRecord = null; btn.disabled = false;
         }
       };
 
-      // 3. FORM KUNJUNGAN DIPERBARUI (ANTI-FREEZE)
+      // 3. FORM KUNJUNGAN DIPERBARUI
       $("visit-form").onsubmit = async e => {
         e.preventDefault();
         const btn = $("visit-save"); btn.disabled = true;
@@ -1220,14 +1226,17 @@
           const r = blankRecord("visit");
           Object.assign(r,{member_name:$("v-member").value.trim(),commission:$("v-commission").value,visit_date:$("v-date").value,visit_status:$("v-status").value,visit_notes:$("v-notes").value.trim()});
           
+          // FOTOKOPI DATA BERSIH SEBELUM MASUK SISTEM
+          const dataBersih = JSON.parse(JSON.stringify(r));
+
           const result = editingRecord && editingRecord.record_type === "visit" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
           
           if(result.isOk){ 
-            if(!editingRecord) saveToSheetDB(r); // Kirim ke SheetDB di latar belakang
+            if(!editingRecord) setTimeout(() => saveToSheetDB(dataBersih), 500); // Kirim fotokopi ke Google Sheets
             closeModal("visit-modal"); showToast(); await logActivity("Menambahkan kunjungan",r.member_name); 
           }
         } catch(err) {
-          console.error(err); alert("Terjadi kesalahan saat menyimpan data.");
+          alert("Error simpan kunjungan: " + err.message);
         } finally {
           editingRecord = null; btn.disabled = false;
         }
