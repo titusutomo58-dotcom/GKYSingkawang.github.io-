@@ -853,26 +853,25 @@
       await window.dataSdk.create(r);
     }
 
-    // --- FUNGSI BARU UNTUK MENGIRIM DATA KE SHEETDB ---
-    async function saveToSheetDB(dataObj) {
-      try {
-        const response = await fetch("https://sheetdb.io/api/v1/zbulood5cnxxx", {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            data: [dataObj]
-          })
-        });
-        const result = await response.json();
-        console.log("Berhasil dibackup ke Google Sheets:", result);
-      } catch (error) {
-        console.error("Gagal membackup ke Google Sheets:", error);
-      }
+    // --- FUNGSI BARU UNTUK MENGIRIM DATA KE SHEETDB (ANTI-FREEZE) ---
+    function saveToSheetDB(dataObj) {
+      fetch("https://sheetdb.io/api/v1/zbulood5cnxxx", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: [dataObj] })
+      })
+      .then(response => {
+        if (!response.ok) console.log("Gagal dari SheetDB, cek kolom atau koneksi.");
+        else console.log("Berhasil masuk ke Google Sheets!");
+      })
+      .catch(error => {
+        console.log("Koneksi ditolak oleh browser/keamanan: " + error.message);
+      });
     }
-    // --------------------------------------------------
+    // ----------------------------------------------------------------
 
     function populateCommissionSelect(selectId, includeAll=false){
       const select = $(selectId);
@@ -1171,52 +1170,67 @@
       $("member-search").oninput = renderMembers;
       $("member-commission-filter").onchange = renderMembers;
 
-      // FORM ANGGOTA BARU DIPERBARUI
+      // 1. FORM ANGGOTA BARU DIPERBARUI (ANTI-FREEZE)
       $("member-form").onsubmit = async e => {
         e.preventDefault();
         const btn = $("member-save"); btn.disabled = true;
-        const r = blankRecord("member");
-        Object.assign(r,{member_name:$("m-name").value.trim(),commission:$("m-commission").value,phone:$("m-phone").value.trim(),address:$("m-address").value.trim(),membership_status:$("m-status").value,notes:$("m-notes").value.trim(),join_date:today()});
-        
-        if(!editingRecord) {
-          await saveToSheetDB(r); // Kirim ke Google Sheets
+        try {
+          const r = blankRecord("member");
+          Object.assign(r,{member_name:$("m-name").value.trim(),commission:$("m-commission").value,phone:$("m-phone").value.trim(),address:$("m-address").value.trim(),membership_status:$("m-status").value,notes:$("m-notes").value.trim(),join_date:today()});
+          
+          const result = editingRecord && editingRecord.record_type === "member" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
+          
+          if(result.isOk){ 
+            if(!editingRecord) saveToSheetDB(r); // Kirim ke SheetDB di latar belakang
+            closeModal("member-modal"); showToast(); await logActivity("Menambahkan anggota",r.member_name); 
+          }
+        } catch(err) {
+          console.error(err); alert("Terjadi kesalahan saat menyimpan data.");
+        } finally {
+          editingRecord = null; btn.disabled = false;
         }
-
-        const result = editingRecord && editingRecord.record_type === "member" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
-        editingRecord = null; btn.disabled = false;
-        if(result.isOk){ closeModal("member-modal"); showToast(); await logActivity("Menambahkan anggota",r.member_name); }
       };
 
-      // FORM KEHADIRAN DIPERBARUI
+      // 2. FORM KEHADIRAN DIPERBARUI (ANTI-FREEZE)
       $("attendance-form").onsubmit = async e => {
         e.preventDefault();
         const btn = $("attendance-save"); btn.disabled = true;
-        const r = blankRecord("attendance");
-        Object.assign(r,{member_name:"Kehadiran keseluruhan",commission:$("a-service").value,visitor_name:$("a-service").value,attendance_date:$("a-date").value,attendance_count:Number($("a-count").value),present:true,notes:$("a-evaluation").value.trim()});
-        
-        if(!editingRecord) {
-          await saveToSheetDB(r); // Kirim ke Google Sheets
+        try {
+          const r = blankRecord("attendance");
+          Object.assign(r,{member_name:"Kehadiran keseluruhan",commission:$("a-service").value,visitor_name:$("a-service").value,attendance_date:$("a-date").value,attendance_count:Number($("a-count").value),present:true,notes:$("a-evaluation").value.trim()});
+          
+          const result = editingRecord && editingRecord.record_type === "attendance" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
+          
+          if(result.isOk){ 
+            if(!editingRecord) saveToSheetDB(r); // Kirim ke SheetDB di latar belakang
+            closeModal("attendance-modal"); showToast(); await logActivity("Mencatat kehadiran",r.member_name); 
+          }
+        } catch(err) {
+          console.error(err); alert("Terjadi kesalahan saat menyimpan data.");
+        } finally {
+          editingRecord = null; btn.disabled = false;
         }
-
-        const result = editingRecord && editingRecord.record_type === "attendance" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
-        editingRecord = null; btn.disabled = false;
-        if(result.isOk){ closeModal("attendance-modal"); showToast(); await logActivity("Mencatat kehadiran",r.member_name); }
       };
 
-      // FORM KUNJUNGAN DIPERBARUI
+      // 3. FORM KUNJUNGAN DIPERBARUI (ANTI-FREEZE)
       $("visit-form").onsubmit = async e => {
         e.preventDefault();
         const btn = $("visit-save"); btn.disabled = true;
-        const r = blankRecord("visit");
-        Object.assign(r,{member_name:$("v-member").value.trim(),commission:$("v-commission").value,visit_date:$("v-date").value,visit_status:$("v-status").value,visit_notes:$("v-notes").value.trim()});
-        
-        if(!editingRecord) {
-          await saveToSheetDB(r); // Kirim ke Google Sheets
+        try {
+          const r = blankRecord("visit");
+          Object.assign(r,{member_name:$("v-member").value.trim(),commission:$("v-commission").value,visit_date:$("v-date").value,visit_status:$("v-status").value,visit_notes:$("v-notes").value.trim()});
+          
+          const result = editingRecord && editingRecord.record_type === "visit" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
+          
+          if(result.isOk){ 
+            if(!editingRecord) saveToSheetDB(r); // Kirim ke SheetDB di latar belakang
+            closeModal("visit-modal"); showToast(); await logActivity("Menambahkan kunjungan",r.member_name); 
+          }
+        } catch(err) {
+          console.error(err); alert("Terjadi kesalahan saat menyimpan data.");
+        } finally {
+          editingRecord = null; btn.disabled = false;
         }
-
-        const result = editingRecord && editingRecord.record_type === "visit" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
-        editingRecord = null; btn.disabled = false;
-        if(result.isOk){ closeModal("visit-modal"); showToast(); await logActivity("Menambahkan kunjungan",r.member_name); }
       };
 
       $("church-form").onsubmit = async e => {
@@ -1286,7 +1300,6 @@
       $("security-save").onclick = async () => await saveSetting("security",{session:$("session-duration").value},$("security-save"));
       $("logout-all-devices").onclick = () => askConfirm(async () => { await saveSetting("security",{session:$("session-duration").value,logout_requested:true}); }, "Keluar dari semua perangkat yang terhubung.");
       
-      // TOMBOL BACKUP KE SHEETDB DIPERBARUI
       $("backup-data").onclick = async () => {
         const btn = $("backup-data");
         btn.disabled = true;
@@ -1294,7 +1307,6 @@
         btn.innerHTML = `<i data-lucide="archive"></i><span class="canva-text" style="color: rgb(21, 59, 91); font-weight: 700; font-style: normal; font-size: 15px;">Proses Backup...</span>`;
         lucide.createIcons();
         try {
-          // Hanya backup data anggota, kehadiran, dan kunjungan
           const dataToBackup = records.filter(r => ["member","attendance","visit"].includes(r.record_type));
           await fetch("https://sheetdb.io/api/v1/zbulood5cnxxx", {
             method: 'POST',
