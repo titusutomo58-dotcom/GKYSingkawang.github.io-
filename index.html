@@ -5,7 +5,6 @@
   <title>Dashboard Administrasi GKY Singkawang</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
-  <!-- Library QR Code & Scanner -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 
@@ -101,18 +100,6 @@
     .link-btn.danger{color:#a53535}
     .mobile{display:none}
 
-    .settings-layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:20px;align-items:start}
-    .settings-nav{padding:10px;position:sticky;top:18px}
-    .settings-nav button{
-      width:100%;display:flex;align-items:center;gap:10px;text-align:left;padding:10px 11px;
-      border:0;border-radius:9px;background:transparent;color:#50606b;font-size:13px;font-weight:600;
-    }
-    .settings-nav button:hover,.settings-nav button.active{background:#eaf1f6;color:var(--navy)}
-    .settings-panel{display:none}
-    .settings-panel.active{display:block;animation:fadeUp .2s ease}
-    .settings-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:20px}
-    .section-line{border:0;border-top:1px solid #e7ecef;margin:20px 0}
-    .inline-note{padding:12px 14px;background:#f6f9fb;border-left:3px solid #7294ad;border-radius:0 9px 9px 0;color:#536772;font-size:13px;text-align:left}
     .modal-layer{display:none;position:fixed;z-index:70;inset:0;background:#03172b99;padding:20px;align-items:center;justify-content:center}
     .modal-layer.show{display:flex}
     .modal{width:min(100%,570px);max-height:calc(90 * min(var(--vh,1vh),1vh));overflow:auto;background:#fff;border-radius:17px;padding:23px}
@@ -400,12 +387,12 @@
    </div>
   </div>
 
-  <!-- Modal Tambah Anggota -->
+  <!-- Modal Tambah / Edit Anggota -->
   <div id="member-modal" class="modal-layer" role="dialog">
    <div class="modal">
     <div class="modal-head">
      <div>
-      <h2 class="serif text-2xl m-0" style="color: rgb(28, 46, 59); font-weight: 700;">Tambah Anggota Jemaat</h2>
+      <h2 id="modal-member-title" class="serif text-2xl m-0" style="color: rgb(28, 46, 59); font-weight: 700;">Tambah Anggota Jemaat</h2>
       <p class="panel-sub">Lengkapi data anggota untuk pengelompokan pelayanan.</p>
      </div><button class="close" data-close="member-modal" type="button"><i data-lucide="x"></i></button>
     </div>
@@ -460,23 +447,25 @@
     function today(){ return new Date().toISOString().slice(0,10); }
     function blankRecord(type){ return { record_type:type, member_name:"", commission:"", phone:"", address:"", membership_status:"Aktif", attendance_count:0, present:false, attendance_date:today() }; }
 
-    // --- FUNGSI KIRIM KE SHEETDB (GOOGLE SHEETS) ---
-    function saveToSheetDB(dataObj) {
-      fetch("https://sheetdb.io/api/v1/zbulood5cnxxx", {
-        method: 'POST',
+    // --- FUNGSI KIRIM / UPDATE KE SHEETDB (GOOGLE SHEETS) ---
+    function saveToSheetDB(dataObj, isUpdate = false) {
+      const method = isUpdate ? 'PUT' : 'POST';
+      const endpoint = isUpdate ? `https://sheetdb.io/api/v1/zbulood5cnxxx/__backendId/${dataObj.__backendId}` : "https://sheetdb.io/api/v1/zbulood5cnxxx";
+      
+      fetch(endpoint, {
+        method: method,
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: [dataObj] })
+        body: JSON.stringify(isUpdate ? { data: dataObj } : { data: [dataObj] })
       }).catch(err => console.log("SheetDB error: " + err.message));
     }
 
-    // --- FUNGSI TARIK DATA OTOMATIS DARI GOOGLE SHEETS (SHEETDB) ---
+    // --- FUNGSI TARIK DATA DARI GOOGLE SHEETS ---
     async function loadDataFromSheetDB() {
       try {
         const response = await fetch("https://sheetdb.io/api/v1/zbulood5cnxxx");
         if (response.ok) {
           const sheetData = await response.json();
           if (Array.isArray(sheetData) && sheetData.length > 0) {
-            // Masukkan data dari sheet ke dalam records aplikasi
             records = sheetData.map((item, index) => ({
               __backendId: item.__backendId || ("sheet_" + index),
               record_type: item.record_type || "member",
@@ -488,7 +477,7 @@
               attendance_date: item.attendance_date || today(),
               present: item.present === "true" || item.present === true
             }));
-            renderMembers();
+            renderAll();
           }
         }
       } catch (err) {
@@ -515,6 +504,21 @@
         commissions().map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
     }
 
+    // --- RENDER DASHBOARD & REKAP UTAMA ---
+    function renderDashboard(){
+      $("metric-members").textContent = members().length;
+      $("metric-commissions").textContent = commissions().length;
+      $("metric-attendance").textContent = attendances().filter(a => a.present).length;
+      $("metric-visits").textContent = visits().length;
+
+      const holder = $("commission-cards");
+      holder.innerHTML = commissions().map(c => `
+        <article class="card metric">
+          <p>${escapeHtml(c)}</p>
+          <strong>${members().filter(m => m.commission === c).length}</strong>
+        </article>`).join("");
+    }
+
     function renderMembers(){
       const query = $("member-search").value.toLowerCase();
       const commission = $("member-commission-filter").value;
@@ -534,6 +538,12 @@
           </td>
         </tr>`).join("");
       $("member-empty").style.display = list.length ? "none" : "block";
+    }
+
+    function renderAll() {
+      renderDashboard();
+      renderMembers();
+      populateCommissionSelect("member-commission-filter", true);
     }
 
     window.showMemberQR = function(id) {
@@ -611,7 +621,6 @@
     document.addEventListener("DOMContentLoaded", async () => {
       lucide.createIcons();
 
-      // Tarik data otomatis dari Google Sheets saat web dibuka
       await loadDataFromSheetDB();
 
       $("login-form").onsubmit = async (e) => {
@@ -621,7 +630,7 @@
         if(u === "admin" && p === "admin") {
           $("welcome").style.display = "none"; 
           $("dashboard").classList.add("active");
-          await loadDataFromSheetDB(); // Segarkan data saat login
+          await loadDataFromSheetDB(); 
         } else {
           $("login-error").textContent = "Gunakan admin / admin"; 
           $("login-error").classList.remove("hidden");
@@ -633,52 +642,78 @@
       document.querySelectorAll("[data-close]").forEach(btn => btn.onclick = () => closeModal(btn.dataset.close));
       $("back-to-dashboard").onclick = () => setView("dashboard-view");
 
-      $("top-add-member").onclick = () => { $("member-form").reset(); populateCommissionSelect("m-commission"); openModal("member-modal"); };
+      $("top-add-member").onclick = () => { 
+        editingRecord = null;
+        $("modal-member-title").textContent = "Tambah Anggota Jemaat";
+        $("member-form").reset(); 
+        populateCommissionSelect("m-commission"); 
+        openModal("member-modal"); 
+      };
       $("member-add").onclick = $("top-add-member").onclick;
       $("member-search").oninput = renderMembers;
       $("member-commission-filter").onchange = renderMembers;
 
+      // --- FORM SUBMIT (TAMBAH / EDIT ANGGOTA) ---
       $("member-form").onsubmit = async e => {
         e.preventDefault();
-        const r = blankRecord("member");
-        Object.assign(r, {
-          member_name: $("m-name").value.trim(),
-          commission: $("m-commission").value,
-          phone: $("m-phone").value.trim(),
-          address: $("m-address").value.trim(),
-          membership_status: $("m-status").value
-        });
-        const res = editingRecord ? await window.dataSdk.update({...editingRecord, ...r}) : await window.dataSdk.create(r);
-        if(res.isOk){
-          if(!editingRecord) saveToSheetDB(r);
-          closeModal("member-modal"); showToast(); editingRecord = null;
-          renderMembers();
+        
+        if (editingRecord) {
+          // Proses Edit Data
+          editingRecord.member_name = $("m-name").value.trim();
+          editingRecord.commission = $("m-commission").value;
+          editingRecord.phone = $("m-phone").value.trim();
+          editingRecord.address = $("m-address").value.trim();
+          editingRecord.membership_status = $("m-status").value;
+
+          await window.dataSdk.update(editingRecord);
+          saveToSheetDB(editingRecord, true);
+        } else {
+          // Proses Tambah Data Baru
+          const r = blankRecord("member");
+          Object.assign(r, {
+            member_name: $("m-name").value.trim(),
+            commission: $("m-commission").value,
+            phone: $("m-phone").value.trim(),
+            address: $("m-address").value.trim(),
+            membership_status: $("m-status").value
+          });
+          await window.dataSdk.create(r);
+          saveToSheetDB(r, false);
         }
+
+        closeModal("member-modal"); 
+        showToast(); 
+        editingRecord = null;
+        renderAll();
       };
 
       window.editMember = function(id) {
         const m = records.find(r => r.__backendId === id);
         if(!m) return;
         editingRecord = m;
-        $("m-name").value = m.member_name;
+        $("modal-member-title").textContent = "Edit Anggota Jemaat";
+        $("m-name").value = m.member_name || "";
         populateCommissionSelect("m-commission");
-        $("m-commission").value = m.commission;
-        $("m-phone").value = m.phone;
-        $("m-status").value = m.membership_status;
-        $("m-address").value = m.address;
+        $("m-commission").value = m.commission || "";
+        $("m-phone").value = m.phone || "";
+        $("m-status").value = m.membership_status || "Aktif";
+        $("m-address").value = m.address || "";
         openModal("member-modal");
       };
 
       window.deleteMember = function(id) {
         const m = records.find(r => r.__backendId === id);
         if(m && confirm("Hapus anggota ini?")) {
-          window.dataSdk.delete(m); showToast(); renderMembers();
+          window.dataSdk.delete(m); 
+          showToast(); 
+          renderAll();
         }
       };
 
       await window.dataSdk.init({
         onDataChanged(data){
-          populateCommissionSelect("member-commission-filter", true);
+          records = data;
+          renderAll();
         }
       });
     });
