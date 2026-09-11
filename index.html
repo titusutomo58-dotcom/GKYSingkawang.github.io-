@@ -5,18 +5,21 @@
   <title>Dashboard Administrasi GKY Singkawang</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
-  <!-- Library QR Code & Scanner -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
-
   <script src="/_sdk/d87b80b4433bab6b.data_sdk.js" integrity="sha512-JKynAZ3aIUkxrmu1y4Enod3283hZsIIaBhOwwM+go3QT3MqYMvKrAZczNoL1jjjyzi8i7cD2EiXs1sP4BPwZ3g=="></script>
   <script src="/_sdk/ad00ce977a5c2ece.resizing_sdk.js" integrity="sha512-bog4wGkBPPOhR0ljLsI2R9w0aS7AHt6iC4MNxsBmTL7IysBG15pB3x/bOQf//NXwh2kdtoBZiW6QfBMagGYlWA=="></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap" rel="stylesheet">
   <style>
     :root{
-      --navy:#092f55; --deep:#061f39; --blue:#174d78; --gold:#d5ad57;
-      --mist:#f4f6f8; --ink:#17212b; --muted:#71808c; --line:#e2e8ed;
-      --success:#2f7d5f; --danger:#ad4141;
+      --navy:#092f55;
+      --deep:#061f39;
+      --blue:#174d78;
+      --gold:#d5ad57;
+      --mist:#f4f6f8;
+      --ink:#17212b;
+      --muted:#71808c;
+      --line:#e2e8ed;
+      --success:#2f7d5f;
+      --danger:#ad4141;
     }
     *{box-sizing:border-box}
     body{margin:0;font-family:"DM Sans",sans-serif;color:var(--ink);background:var(--mist)}
@@ -43,7 +46,8 @@
 
     .primary,.secondary,.danger-button{
       border:0;border-radius:10px;padding:11px 15px;font-weight:700;display:inline-flex;
-      gap:7px;align-items:center;justify-content:center;transition:.2s ease;width:100%;
+      gap:7px;align-items:center;justify-content:center;transition:.2s ease;
+      width: 100%;
     }
     .primary{background:var(--gold);color:var(--navy)}
     .primary:hover{background:#e5c475;transform:translateY(-1px)}
@@ -93,11 +97,11 @@
     .full{grid-column:1/-1}
     .textarea{min-height:96px;resize:vertical}
     .table-wrap{overflow:auto}
-    .data-table{width:100%;min-width:850px;border-collapse:collapse}
+    .data-table{width:100%;min-width:800px;border-collapse:collapse}
     .data-table th{text-align:left;padding:12px;background:#f7f9fa;text-transform:uppercase;letter-spacing:.05em;font-size:11px;color:#697883}
     .data-table td{padding:12px;border-top:1px solid #edf1f3;font-size:13px;color:#344652}
     .status{font-size:11px;padding:4px 8px;border-radius:999px;background:#edf3f7;color:#31546c}
-    .link-btn{border:0;background:transparent;padding:3px 6px;color:#174d78;font-weight:700;font-size:12px}
+    .link-btn{border:0;background:transparent;padding:3px 4px;color:#174d78;font-weight:700;font-size:12px}
     .link-btn.danger{color:#a53535}
     .mobile{display:none}
 
@@ -169,16 +173,19 @@
   <div class="app-shell">
    <section id="welcome" class="welcome">
     <div class="welcome-inner">
-     <div class="logo-halo"><img data-template-id="gky-logo" class="canva-image" loading="lazy" src="Logo_Gereja_Kristus_Yesus.jpg" alt="Logo Gereja Kristus Yesus"></div>
-     <p data-template-id="welcome-kicker" class="canva-text mt-4 text-xs font-bold tracking-[.2em]" style="color: rgb(231, 196, 116); font-weight: 700; font-size: 13px;">Sistem Administrasi Gereja</p>
-     <h1 data-template-id="welcome-title" class="canva-text serif mt-1" style="color: rgb(255, 255, 255); font-weight: 700; font-size: 24px;">GKY Singkawang</h1>
+     <div class="logo-halo"><img data-template-id="gky-logo" class="canva-image" loading="lazy" src="Logo_Gereja_Kristus_Yesus.jpg" alt="Logo Gereja Kristus Yesus">
+     </div>
+     <p data-template-id="welcome-kicker" class="canva-text mt-4 text-xs font-bold tracking-[.2em]" style="color: rgb(231, 196, 116); font-weight: 700; font-style: normal; font-size: 13px;">Sistem Administrasi Gereja</p>
+     <h1 data-template-id="welcome-title" class="canva-text serif mt-1" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">GKY Singkawang</h1>
      
+     <!-- Form Login & Buat Akun -->
      <div id="auth-container" class="mt-4 text-left">
        <div class="flex gap-2 mb-3">
          <button type="button" id="tab-login-btn" onclick="switchAuthTab('login')" class="flex-1 py-1.5 text-xs font-bold rounded bg-amber-500 text-slate-900 transition">Login</button>
          <button type="button" id="tab-register-btn" onclick="switchAuthTab('register')" class="flex-1 py-1.5 text-xs font-bold rounded bg-slate-700 text-white transition">Buat Akun</button>
        </div>
 
+       <!-- Form Login -->
        <form id="login-form" class="space-y-3">
          <div class="form-group">
            <label style="color:#e2e8f0; font-size:11px;">Username / Email</label>
@@ -192,6 +199,7 @@
          <button type="submit" class="primary mt-2" style="padding:9px; font-size:14px;">MASUK SISTEM</button>
        </form>
 
+       <!-- Form Register (Buat Akun) -->
        <form id="register-form" class="space-y-3 hidden">
          <div class="form-group">
            <label style="color:#e2e8f0; font-size:11px;">Nama Lengkap</label>
@@ -211,200 +219,427 @@
      </div>
 
      <div class="gold-rule"></div>
-     <p data-template-id="welcome-verse" class="canva-text serif italic" style="color: rgb(255, 255, 255); font-weight: 400; font-size: 13px;">“Menjadi Gereja yang Mulia dan Misioner”</p>
+     <p data-template-id="welcome-verse" class="canva-text serif italic" style="color: rgb(255, 255, 255); font-weight: 400; font-style: italic; font-size: 13px;">“Menjadi Gereja yang Mulia dan Misioner”</p>
     </div>
    </section>
-
    <div id="dashboard" class="dashboard">
     <aside id="sidebar" class="sidebar">
-     <div class="brand"><img data-template-id="sidebar-logo" class="canva-image" loading="lazy" src="Logo_Gereja_Kristus_Yesus.jpg" alt="Logo">
-      <div><strong id="church-name-side" class="canva-text text-white" style="font-size: 15px;">GKY</strong> <small class="canva-text block text-xs text-slate-400">Gereja Kristus Yesus</small></div>
+     <div class="brand"><img data-template-id="sidebar-logo" class="canva-image" loading="lazy" src="Logo_Gereja_Kristus_Yesus.jpg" alt="Logo Gereja Kristus Yesus">
+      <div><strong id="church-name-side" data-template-id="sidebar-brand" class="canva-text text-white" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 15px;">GKY</strong> <small data-template-id="sidebar-caption" class="canva-text block text-xs text-slate-400" style="color: rgb(158, 183, 203); font-weight: 400; font-style: normal; font-size: 15px;">Gereja Kristus Yesus</small>
+      </div>
      </div>
-     <nav class="mt-5 space-y-1" aria-label="Navigasi utama">
-      <button class="nav-link active" data-view="dashboard-view" type="button"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></button> 
-      <button class="nav-link" data-view="members-view" type="button"><i data-lucide="users"></i><span>Anggota Jemaat</span></button> 
-      <button class="nav-link" data-view="qr-attendance-view" type="button"><i data-lucide="qr-code"></i><span>Absensi Scan QR</span></button> 
-      <button class="nav-link" data-view="attendance-view" type="button"><i data-lucide="calendar-check"></i><span>Kehadiran</span></button> 
-      <button class="nav-link" data-view="visits-view" type="button"><i data-lucide="clipboard-list"></i><span>Kunjungan Jemaat</span></button> 
-      <button class="nav-link" data-view="reports-view" type="button"><i data-lucide="bar-chart-3"></i><span>Laporan</span></button> 
-      <button class="nav-link" data-view="settings-view" type="button"><i data-lucide="settings"></i><span>Pengaturan</span></button>
+     <nav class="mt-5 space-y-1" aria-label="Navigasi utama"><button class="nav-link active" data-view="dashboard-view" type="button"><i data-lucide="layout-dashboard"></i><span data-template-id="nav-dashboard" class="canva-text" style="color: rgb(216, 231, 243); font-weight: 500; font-style: normal; font-size: 15px;">Dashboard</span></button> <button class="nav-link" data-view="members-view" type="button"><i data-lucide="users"></i><span data-template-id="nav-members" class="canva-text" style="color: rgb(216, 231, 243); font-weight: 500; font-style: normal; font-size: 15px;">Anggota Jemaat</span></button> <button class="nav-link" data-view="attendance-view" type="button"><i data-lucide="calendar-check"></i><span data-template-id="nav-attendance" class="canva-text" style="color: rgb(216, 231, 243); font-weight: 500; font-style: normal; font-size: 15px;">Kehadiran</span></button> <button class="nav-link" data-view="visits-view" type="button"><i data-lucide="clipboard-list"></i><span data-template-id="nav-visits" class="canva-text" style="color: rgb(216, 231, 243); font-weight: 500; font-style: normal; font-size: 15px;">Kunjungan Jemaat</span></button> <button class="nav-link" data-view="reports-view" type="button"><i data-lucide="bar-chart-3"></i><span data-template-id="nav-reports" class="canva-text" style="color: rgb(216, 231, 243); font-weight: 500; font-style: normal; font-size: 15px;">Laporan</span></button> <button class="nav-link" data-view="settings-view" type="button"><i data-lucide="settings"></i><span data-template-id="nav-settings" class="canva-text" style="color: rgb(216, 231, 243); font-weight: 500; font-style: normal; font-size: 15px;">Pengaturan</span></button>
      </nav>
     </aside>
-
     <main class="main-area">
      <header class="topbar">
-      <div class="flex gap-3"><button id="mobile-menu" class="mobile secondary" type="button" aria-label="Buka menu"><i data-lucide="menu"></i></button>
+      <div class="flex gap-3"><button id="mobile-menu" class="mobile secondary" type="button" aria-label="Buka menu"> <i data-lucide="menu"></i> </button>
        <div>
-        <p class="canva-text eyebrow" style="color: rgb(184, 134, 49); font-weight: 700;">Administrasi Gereja</p>
-        <h1 class="canva-text page-title">Dashboard Utama</h1>
-        <p id="dashboard-church-summary" class="canva-text copy">Pantau data jemaat, kehadiran, dan pelayanan pastoral dalam satu tempat.</p>
+        <p data-template-id="dashboard-eyebrow" class="canva-text eyebrow" style="color: rgb(184, 134, 49); font-weight: 700; font-style: normal; font-size: 15px;">Administrasi Gereja</p>
+        <h1 data-template-id="dashboard-title" class="canva-text page-title" style="color: rgb(23, 33, 43); font-weight: 700; font-style: normal; font-size: 30px;">Dashboard Utama</h1>
+        <p id="dashboard-church-summary" data-template-id="dashboard-subtitle" class="canva-text copy" style="color: rgb(102, 118, 129); font-weight: 400; font-style: normal; font-size: 15px;">Pantau data jemaat, kehadiran, dan pelayanan pastoral dalam satu tempat.</p>
        </div>
-      </div>
-      <button id="top-add-member" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"><i data-lucide="user-plus"></i><span>Tambah Anggota</span></button>
+      </div><button id="top-add-member" data-template-id="top-add-member-button" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"> <i data-lucide="user-plus"></i><span data-template-id="top-add-member-label" class="canva-text" style="color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px;">Tambah Anggota</span> </button>
      </header>
-
-     <!-- Dashboard View -->
      <section id="dashboard-view" class="view active">
       <div class="grid4">
-       <article class="card metric"><p>Anggota Terdata</p><strong id="metric-members">0</strong></article>
-       <article class="card metric"><p>Komisi Aktif</p><strong id="metric-commissions">0</strong></article>
-       <article class="card metric"><p>Kehadiran Tercatat</p><strong id="metric-attendance">0</strong></article>
-       <article class="card metric"><p>Kunjungan Tercatat</p><strong id="metric-visits">0</strong></article>
+       <article class="card metric">
+        <p data-template-id="metric-members-label" class="canva-text" style="color: rgb(111, 126, 137); font-weight: 400; font-style: normal; font-size: 15px;">Anggota Terdata</p><strong id="metric-members">0</strong>
+       </article>
+       <article class="card metric">
+        <p data-template-id="metric-commission-label" class="canva-text" style="color: rgb(111, 126, 137); font-weight: 400; font-style: normal; font-size: 15px;">Komisi Aktif</p><strong id="metric-commissions">0</strong>
+       </article>
+       <article class="card metric">
+        <p data-template-id="metric-attendance-label" class="canva-text" style="color: rgb(111, 126, 137); font-weight: 400; font-style: normal; font-size: 15px;">Kehadiran Tercatat</p><strong id="metric-attendance">0</strong>
+       </article>
+       <article class="card metric">
+        <p data-template-id="metric-visits-label" class="canva-text" style="color: rgb(111, 126, 137); font-weight: 400; font-style: normal; font-size: 15px;">Kunjungan Tercatat</p><strong id="metric-visits">0</strong>
+       </article>
       </div>
       <div class="content-grid">
        <section class="panel">
-        <h2 class="panel-title">Ringkasan Komisi</h2>
-        <p class="panel-sub">Jumlah anggota berdasarkan komisi pelayanan yang aktif.</p>
+        <h2 data-template-id="dashboard-commission-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Ringkasan Komisi</h2>
+        <p data-template-id="dashboard-commission-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Jumlah anggota berdasarkan komisi pelayanan yang aktif.</p>
         <div id="commission-cards" class="grid4 mt-5"></div>
        </section>
        <aside class="panel">
-        <h2 class="panel-title">Aktivitas Terbaru</h2>
-        <p class="panel-sub">Riwayat aktivitas nyata dari penggunaan sistem.</p>
+        <h2 data-template-id="dashboard-activity-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Aktivitas Terbaru</h2>
+        <p data-template-id="dashboard-activity-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Riwayat aktivitas nyata dari penggunaan sistem.</p>
         <div id="dashboard-activities" class="activity-list"></div>
        </aside>
       </div>
      </section>
-
-     <!-- Members View -->
      <section id="members-view" class="view">
       <div class="panel">
        <div class="flex justify-between gap-3 flex-wrap">
         <div>
-         <h2 class="panel-title">Database Anggota Jemaat</h2>
-         <p class="panel-sub">Kelola data utama seluruh anggota dan komisi pelayanan.</p>
-        </div>
-        <button id="member-add" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"><i data-lucide="plus"></i><span>Tambah Anggota</span></button>
+         <h2 data-template-id="members-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Database Anggota Jemaat</h2>
+         <p data-template-id="members-subtitle" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Kelola data utama seluruh anggota dan komisi pelayanan.</p>
+        </div><button id="member-add" data-template-id="add-member-button" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"> <i data-lucide="plus"></i><span data-template-id="add-member-label" class="canva-text" style="color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px;">Tambah Anggota</span> </button>
        </div>
-       <div class="toolbar">
-        <input id="member-search" class="canva-input field search" type="search" placeholder="Cari nama anggota..."> 
-        <select id="member-commission-filter" class="field" style="max-width:240px"></select>
+       <div class="toolbar"><input id="member-search" data-template-id="member-search" class="canva-input field search" type="search" placeholder="Cari nama anggota..." style="color: rgb(100, 114, 125); font-weight: 400; font-style: normal; font-size: 15px;"> <select id="member-commission-filter" class="field" style="max-width:240px"></select>
        </div>
        <div class="table-wrap">
         <table class="data-table">
          <thead>
           <tr>
-           <th>Nama</th>
-           <th>Komisi</th>
-           <th>Telepon</th>
-           <th>Alamat</th>
-           <th>Status</th>
-           <th>Aksi / QR Code</th>
+           <th data-template-id="member-th-name" class="canva-text" style="color: rgb(105, 120, 131); font-weight: 700; font-style: normal; font-size: 15px;">Nama</th>
+           <th data-template-id="member-th-commission" class="canva-text" style="color: rgb(105, 120, 131); font-weight: 700; font-style: normal; font-size: 15px;">Komisi</th>
+           <th data-template-id="member-th-phone" class="canva-text" style="color: rgb(105, 120, 131); font-weight: 700; font-style: normal; font-size: 15px;">Telepon</th>
+           <th class="canva-text" style="color: rgb(105, 120, 131); font-weight: 700; font-style: normal; font-size: 15px;">Alamat</th>
+           <th data-template-id="member-th-status" class="canva-text" style="color: rgb(105, 120, 131); font-weight: 700; font-style: normal; font-size: 15px;">Status</th>
+           <th data-template-id="member-th-action" class="canva-text" style="color: rgb(105, 120, 131); font-weight: 700; font-style: normal; font-size: 15px;">Aksi</th>
           </tr>
          </thead>
          <tbody id="member-body"></tbody>
         </table>
        </div>
-       <p id="member-empty" class="empty">Belum ada data anggota. Tambahkan anggota untuk memulai administrasi.</p>
+       <p id="member-empty" data-template-id="member-empty" class="canva-text empty" style="color: rgb(123, 137, 147); font-weight: 400; font-style: normal; font-size: 15px;">Belum ada data anggota. Tambahkan anggota untuk memulai administrasi.</p>
       </div>
      </section>
-
-     <!-- QR Attendance View (BARU) -->
-     <section id="qr-attendance-view" class="view">
-      <div class="panel">
-       <div class="flex justify-between gap-3 flex-wrap mb-4">
-        <div>
-         <h2 class="panel-title">Absensi Scan QR Code Jemaat</h2>
-         <p class="panel-sub">Arahkan kamera ke QR Code anggota untuk mencatat kehadiran ke Google Sheets.</p>
-        </div>
-       </div>
-       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-        <div class="card bg-slate-900 text-white p-4">
-         <h3 class="font-bold mb-3 text-amber-400">Kamera Scanner</h3>
-         <div id="reader" style="width: 100%; border-radius: 8px; overflow: hidden;"></div>
-        </div>
-        <div class="card bg-white p-4">
-         <h3 class="font-bold text-slate-800 mb-2">Hasil Scan Terakhir</h3>
-         <div id="scan-result-box" class="p-4 bg-slate-100 rounded-lg text-sm text-slate-700 min-h-[120px] flex flex-col justify-center items-center text-center">
-           <i data-lucide="scan-line" class="w-10 h-10 text-slate-400 mb-2"></i>
-           <span>Belum ada QR yang dipindai. Silakan arahkan kamera ke QR anggota.</span>
-         </div>
-         <div class="mt-4">
-           <label class="block text-xs font-bold text-slate-600 mb-1">Jenis Ibadah Kehadiran</label>
-           <select id="qr-attendance-service" class="field">
-             <option>KU 1</option><option>KU 2</option><option>Persekutuan Doa</option><option>Komisi Remaja</option><option>Komisi Sekolah Minggu</option>
-           </select>
-         </div>
-        </div>
-       </div>
-      </div>
-     </section>
-
-     <!-- Attendance View -->
      <section id="attendance-view" class="view">
       <div class="panel">
        <div class="flex justify-between gap-3 flex-wrap">
         <div>
-         <h2 class="panel-title">Kehadiran Jemaat</h2>
-         <p class="panel-sub">Catat kehadiran pelayanan berdasarkan komisi dan kegiatan.</p>
-        </div>
-        <button id="attendance-add" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"><i data-lucide="plus"></i><span>Catat Kehadiran</span></button>
+         <h2 data-template-id="attendance-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Kehadiran Jemaat</h2>
+         <p data-template-id="attendance-subtitle" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Catat kehadiran pelayanan berdasarkan komisi dan kegiatan.</p>
+        </div><button id="attendance-add" data-template-id="add-attendance-button" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"> <i data-lucide="plus"></i><span data-template-id="add-attendance-label" class="canva-text" style="color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px;">Catat Kehadiran</span> </button>
        </div>
        <div id="attendance-list" class="activity-list mt-5"></div>
       </div>
      </section>
-
-     <!-- Visits View -->
      <section id="visits-view" class="view">
       <div class="panel">
        <div class="flex justify-between gap-3 flex-wrap">
         <div>
-         <h2 class="panel-title">Kunjungan Jemaat</h2>
-         <p class="panel-sub">Catat dan pantau tindak lanjut pelayanan kunjungan jemaat.</p>
-        </div>
-        <button id="visit-add" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"><i data-lucide="plus"></i><span>Tambah Kunjungan</span></button>
+         <h2 data-template-id="visits-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Kunjungan Jemaat</h2>
+         <p data-template-id="visits-subtitle" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Catat dan pantau tindak lanjut pelayanan kunjungan jemaat.</p>
+        </div><button id="visit-add" data-template-id="add-visit-button" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"> <i data-lucide="plus"></i><span data-template-id="add-visit-label" class="canva-text" style="color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px;">Tambah Kunjungan</span> </button>
        </div>
        <div id="visit-list" class="activity-list mt-5"></div>
+       <hr class="section-line">
+       <div class="flex justify-between gap-3 flex-wrap items-start">
+        <div>
+         <h2 data-template-id="visits-report-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 18px;">Laporan Kunjungan Jemaat</h2>
+         <p data-template-id="visits-report-subtitle" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Ringkasan pelayanan kunjungan berdasarkan komisi dan data aktual.</p>
+        </div>
+        <div class="flex gap-2 flex-wrap items-center">
+         <label class="sr-only" for="visits-export-format">Format laporan</label><select id="visits-export-format" class="field" style="width:auto"><option value="csv">Excel (CSV)</option><option value="pdf">PDF</option><option value="doc">Word</option></select><button id="download-visits-report" data-template-id="download-visits-report-button" class="canva-button secondary" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 700; width: auto;"><i data-lucide="download"></i><span data-template-id="download-visits-report-label" class="canva-text" style="color: rgb(21, 59, 91); font-weight: 700; font-style: normal; font-size: 15px;">Export Laporan</span></button>
+        </div>
+       </div>
+       <div id="visits-report-cards" class="grid4 mt-5"></div>
       </div>
      </section>
-
-     <!-- Reports View -->
      <section id="reports-view" class="view">
       <div class="panel">
        <div class="flex justify-between gap-3 flex-wrap">
         <div>
-         <h2 class="panel-title">Laporan Administrasi</h2>
-         <p class="panel-sub">Rekap anggota, kehadiran, kunjungan, dan pelayanan.</p>
+         <h2 data-template-id="reports-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Laporan Administrasi</h2>
+         <p data-template-id="reports-subtitle" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Rekap anggota, kehadiran, kunjungan, dan pelayanan berdasarkan data aktual.</p>
         </div>
         <div class="flex gap-2 flex-wrap items-center">
-         <select id="report-export-format" class="field" style="width:auto"><option value="csv">Excel (CSV)</option><option value="pdf">PDF</option></select>
-         <button id="export-report" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"><i data-lucide="download"></i><span>Export Laporan</span></button>
+         <label class="sr-only" for="report-export-format">Format laporan</label><select id="report-export-format" class="field" style="width:auto"><option value="csv">Excel (CSV)</option><option value="pdf">PDF</option><option value="doc">Word</option></select><button id="export-report" data-template-id="export-button" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"> <i data-lucide="download"></i><span data-template-id="export-label" class="canva-text" style="color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px;">Export Laporan</span> </button>
         </div>
        </div>
        <div id="report-cards" class="grid4 mt-6"></div>
       </div>
      </section>
-
-     <!-- Settings View -->
      <section id="settings-view" class="view">
       <div class="settings-head">
        <div>
-        <p class="canva-text eyebrow" style="color: rgb(184, 134, 49); font-weight: 700;">Administrasi Sistem</p>
-        <h2 class="page-title" style="font-size: 23px;">Pengaturan</h2>
-       </div>
-       <button id="back-to-dashboard" class="canva-button secondary" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; width: auto;"><i data-lucide="arrow-left"></i><span>Kembali ke Dashboard</span></button>
+        <p data-template-id="settings-eyebrow" class="canva-text eyebrow" style="color: rgb(184, 134, 49); font-weight: 700; font-style: normal; font-size: 15px;">Administrasi Sistem</p>
+        <h2 data-template-id="settings-title" class="canva-text page-title" style="color: rgb(23, 33, 43); font-weight: 700; font-style: normal; font-size: 23px;">Pengaturan</h2>
+        <p data-template-id="settings-copy" class="canva-text copy" style="color: rgb(102, 118, 129); font-weight: 400; font-style: normal; font-size: 15px;">Kelola konfigurasi website dan administrasi GKY Singkawang.</p>
+       </div><button id="back-to-dashboard" data-template-id="back-dashboard-button" class="canva-button secondary" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; width: auto;"> <i data-lucide="arrow-left"></i><span data-template-id="back-dashboard-label" class="canva-text" style="color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px;">Kembali ke Dashboard</span> </button>
       </div>
       <div class="settings-layout">
-       <aside class="panel settings-nav">
-        <button class="settings-tab active" data-settings-panel="church-settings" type="button"><i data-lucide="church"></i><span>Profil Gereja</span></button> 
-        <button class="settings-tab" data-settings-panel="about-settings" type="button"><i data-lucide="info"></i><span>Tentang</span></button>
+       <aside class="panel settings-nav" aria-label="Kategori pengaturan"><button class="settings-tab active" data-settings-panel="church-settings" type="button"><i data-lucide="church"></i><span data-template-id="settings-nav-church" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Profil Gereja</span></button> <button class="settings-tab" data-settings-panel="admin-settings" type="button"><i data-lucide="user-cog"></i><span data-template-id="settings-nav-admin" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Akun Administrator</span></button> <button class="settings-tab" data-settings-panel="users-settings" type="button"><i data-lucide="users-round"></i><span data-template-id="settings-nav-users" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Manajemen Pengguna</span></button> <button class="settings-tab" data-settings-panel="commissions-settings" type="button"><i data-lucide="network"></i><span data-template-id="settings-nav-commissions" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Manajemen Komisi</span></button> <button class="settings-tab" data-settings-panel="attendance-settings" type="button"><i data-lucide="calendar-check"></i><span data-template-id="settings-nav-attendance" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Kehadiran</span></button> <button class="settings-tab" data-settings-panel="visits-settings" type="button"><i data-lucide="hand-heart"></i><span data-template-id="settings-nav-visits" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Kunjungan</span></button> <button class="settings-tab" data-settings-panel="notifications-settings" type="button"><i data-lucide="bell"></i><span data-template-id="settings-nav-notifications" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Notifikasi</span></button> <button class="settings-tab" data-settings-panel="appearance-settings" type="button"><i data-lucide="palette"></i><span data-template-id="settings-nav-appearance" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Tampilan</span></button> <button class="settings-tab" data-settings-panel="security-settings" type="button"><i data-lucide="shield-check"></i><span data-template-id="settings-nav-security" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Keamanan</span></button> <button class="settings-tab" data-settings-panel="backup-settings" type="button"><i data-lucide="database-backup"></i><span data-template-id="settings-nav-backup" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Backup &amp; Data</span></button> <button class="settings-tab" data-settings-panel="system-settings" type="button"><i data-lucide="sliders-horizontal"></i><span data-template-id="settings-nav-system" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Sistem</span></button> <button class="settings-tab" data-settings-panel="about-settings" type="button"><i data-lucide="info"></i><span data-template-id="settings-nav-about" class="canva-text" style="color: rgb(80, 96, 107); font-weight: 600; font-style: normal; font-size: 15px;">Tentang</span></button>
        </aside>
        <div>
         <section id="church-settings" class="settings-panel active">
          <div class="panel">
-          <h2 class="panel-title">Profil Gereja</h2>
+          <h2 data-template-id="church-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Profil Gereja</h2>
+          <p data-template-id="church-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Informasi ini diterapkan pada halaman dashboard dan laporan administrasi.</p>
           <form id="church-form" class="mt-6">
            <div class="form-grid">
-            <div class="form-group"><label>Nama Gereja</label> <input id="church-short-name" class="field" required></div>
-            <div class="form-group"><label>Nama Lengkap</label> <input id="church-full-name" class="field"></div>
+            <div class="form-group full"><label data-template-id="church-logo-label" class="canva-text" for="church-logo-note" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Logo Gereja</label>
+             <div class="inline-note"><span data-template-id="church-logo-help" class="canva-text" style="color: rgb(83, 103, 114); font-weight: 400; font-style: normal; font-size: 15px;">Logo dapat diganti langsung melalui area gambar logo pada editor Canva.</span>
+             </div><input id="church-logo-note" class="field" type="text" placeholder="Logo dapat diperbarui melalui editor Canva.">
+            </div>
+            <div class="form-group"><label data-template-id="church-short-name-label" class="canva-text" for="church-short-name" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nama Gereja</label> <input id="church-short-name" class="field" required="">
+            </div>
+            <div class="form-group"><label data-template-id="church-full-name-label" class="canva-text" for="church-full-name" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nama Lengkap Gereja</label> <input id="church-full-name" class="field">
+            </div>
+            <div class="form-group full"><label data-template-id="church-vision-label" class="canva-text" for="church-vision" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Visi Gereja</label> <textarea id="church-vision" class="field textarea"></textarea>
+            </div>
+            <div class="form-group full"><label data-template-id="church-address-label" class="canva-text" for="church-address" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Alamat Gereja</label> <textarea id="church-address" class="field textarea"></textarea>
+            </div>
+            <div class="form-group"><label data-template-id="church-phone-label" class="canva-text" for="church-phone" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nomor Telepon</label> <input id="church-phone" class="field" type="tel">
+            </div>
+            <div class="form-group"><label data-template-id="church-email-label" class="canva-text" for="church-email" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Email Gereja</label> <input id="church-email" class="field" type="email">
+            </div>
+            <div class="form-group full"><label data-template-id="church-extra-label" class="canva-text" for="church-extra" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Informasi Tambahan Gereja</label> <textarea id="church-extra" class="field textarea"></textarea>
+            </div>
            </div>
-           <div class="mt-5 flex justify-end"><button id="church-save" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;">Simpan</button></div>
+           <div class="mt-5 flex justify-end"><button id="church-save" data-template-id="save-church-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Perubahan</button>
+           </div>
+          </form>
+         </div>
+        </section>
+        <section id="admin-settings" class="settings-panel">
+         <div class="panel">
+          <h2 data-template-id="admin-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Akun Administrator</h2>
+          <p data-template-id="admin-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Perbarui informasi profil administrator sistem.</p>
+          <form id="admin-form" class="mt-6">
+           <div class="form-grid">
+            <div class="form-group"><label data-template-id="admin-name-label" class="canva-text" for="admin-name" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nama Administrator</label> <input id="admin-name" class="field">
+            </div>
+            <div class="form-group"><label data-template-id="admin-username-label" class="canva-text" for="admin-username" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Username</label> <input id="admin-username" class="field">
+            </div>
+            <div class="form-group"><label data-template-id="admin-email-label" class="canva-text" for="admin-email" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Email</label> <input id="admin-email" class="field" type="email">
+            </div>
+            <div class="form-group"><label data-template-id="admin-phone-label" class="canva-text" for="admin-phone" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nomor Telepon</label> <input id="admin-phone" class="field" type="tel">
+            </div>
+            <div class="form-group full"><label data-template-id="admin-photo-label" class="canva-text" for="admin-photo" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Foto Profil</label> <input id="admin-photo" class="field" type="text">
+            </div>
+           </div>
+           <div class="inline-note mt-5">
+            <span data-template-id="admin-security-note" class="canva-text" style="color: rgb(83, 103, 114); font-weight: 400; font-style: normal; font-size: 15px;">Untuk keamanan, perubahan password dan autentikasi akun dikelola melalui pengaturan akun Canva.</span>
+           </div>
+           <div class="mt-5 flex justify-end gap-2 flex-wrap"><button id="admin-password-info" data-template-id="change-password-button" class="canva-button secondary" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px; width: auto;">Ubah Password</button> <button id="admin-save" data-template-id="save-admin-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Perubahan</button>
+           </div>
+          </form>
+         </div>
+        </section>
+        <section id="users-settings" class="settings-panel">
+         <div class="panel">
+          <div class="flex justify-between gap-3 flex-wrap">
+           <div>
+            <h2 data-template-id="users-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Manajemen Pengguna</h2>
+            <p data-template-id="users-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Tambahkan pengguna dan tentukan hak akses administrasi sistem.</p>
+           </div><button id="open-user-modal" data-template-id="add-user-button" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"><i data-lucide="plus"></i><span data-template-id="add-user-label" class="canva-text" style="color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px;">Tambah Pengguna</span></button>
+          </div>
+          <div id="user-list" class="activity-list mt-5"></div>
+          <p id="user-empty" data-template-id="user-empty" class="canva-text empty" style="color: rgb(123, 137, 147); font-weight: 400; font-style: normal; font-size: 15px;">Belum ada pengguna tambahan yang terdaftar.</p>
+         </div>
+        </section>
+        <section id="commissions-settings" class="settings-panel">
+         <div class="panel">
+          <div class="flex justify-between gap-3 flex-wrap">
+           <div>
+            <h2 data-template-id="commissions-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Manajemen Komisi</h2>
+            <p data-template-id="commissions-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Komisi aktif akan digunakan pada formulir anggota, kehadiran, kunjungan, dan laporan.</p>
+           </div><button id="open-commission-modal" data-template-id="add-commission-button" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"><i data-lucide="plus"></i><span data-template-id="add-commission-label" class="canva-text" style="color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px;">Tambah Komisi</span></button>
+          </div>
+          <div id="commission-list" class="commission-list mt-5"></div>
+          <p id="commission-empty" data-template-id="commission-empty" class="canva-text empty" style="color: rgb(123, 137, 147); font-weight: 400; font-style: normal; font-size: 15px;">Belum ada komisi yang tersedia.</p>
+         </div>
+        </section>
+        <section id="attendance-settings" class="settings-panel">
+         <div class="panel">
+          <h2 data-template-id="attendance-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Pengaturan Kehadiran</h2>
+          <p data-template-id="attendance-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Tentukan standar pencatatan kehadiran yang digunakan oleh pelayanan.</p>
+          <form id="attendance-settings-form" class="mt-6">
+           <div class="form-grid">
+            <div class="form-group"><label data-template-id="attendance-type-label" class="canva-text" for="attendance-type" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Jenis Kegiatan</label> <input id="attendance-type" class="field">
+            </div>
+            <div class="form-group"><label data-template-id="attendance-period-label" class="canva-text" for="attendance-period" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Periode Pencatatan</label> <select id="attendance-period" class="field"><option>Harian</option><option>Mingguan</option><option>Bulanan</option></select>
+            </div>
+            <div class="form-group full"><label data-template-id="attendance-commission-setting-label" class="canva-text" for="attendance-commission-setting" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Komisi yang Menggunakan Kehadiran</label> <select id="attendance-commission-setting" class="field" multiple="" style="min-height:130px"></select>
+            </div>
+            <div class="form-group"><label data-template-id="attendance-status-setting-label" class="canva-text" for="attendance-status-setting" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Status Kehadiran</label> <input id="attendance-status-setting" class="field">
+            </div>
+            <div class="form-group"><label data-template-id="attendance-note-setting-label" class="canva-text" for="attendance-note-setting" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Keterangan Kehadiran</label> <input id="attendance-note-setting" class="field">
+            </div>
+           </div>
+           <div class="mt-5 flex justify-end">
+            <button id="attendance-settings-save" data-template-id="save-attendance-settings-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Perubahan</button>
+           </div>
+          </form>
+         </div>
+        </section>
+        <section id="visits-settings" class="settings-panel">
+         <div class="panel">
+          <h2 data-template-id="visits-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Pengaturan Kunjungan</h2>
+          <p data-template-id="visits-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Kelola kategori, status, formulir, dan pengingat kunjungan pastoral.</p>
+          <form id="visits-settings-form" class="mt-6">
+           <div class="form-grid">
+            <div class="form-group"><label data-template-id="visit-category-label" class="canva-text" for="visit-category" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Kategori Kunjungan</label> <input id="visit-category" class="field">
+            </div>
+            <div class="form-group"><label data-template-id="visit-status-setting-label" class="canva-text" for="visit-status-setting" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Status Kunjungan</label> <input id="visit-status-setting" class="field">
+            </div>
+            <div class="form-group full"><label data-template-id="visit-form-setting-label" class="canva-text" for="visit-form-setting" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Formulir Kunjungan</label> <textarea id="visit-form-setting" class="field textarea"></textarea>
+            </div>
+            <div class="form-group"><label data-template-id="visit-notes-setting-label" class="canva-text" for="visit-notes-setting" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Catatan Kunjungan</label> <input id="visit-notes-setting" class="field">
+            </div>
+            <div class="form-group"><label data-template-id="visit-reminder-label" class="canva-text" for="visit-reminder" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Pengingat Kunjungan</label> <select id="visit-reminder" class="field"><option>Aktif</option><option>Nonaktif</option></select>
+            </div>
+           </div>
+           <div class="mt-5 flex justify-end">
+            <button id="visits-settings-save" data-template-id="save-visits-settings-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Perubahan</button>
+           </div>
+          </form>
+         </div>
+        </section>
+        <section id="notifications-settings" class="settings-panel">
+         <div class="panel">
+          <h2 data-template-id="notifications-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Notifikasi</h2>
+          <p data-template-id="notifications-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Pilih notifikasi sistem yang ingin diaktifkan.</p>
+          <form id="notifications-form" class="mt-4">
+           <div class="setting-row">
+            <div>
+             <h3 data-template-id="notify-member-title" class="canva-text" style="color: rgb(36, 57, 70); font-weight: 700; font-style: normal; font-size: 18px;">Anggota baru ditambahkan</h3>
+             <p data-template-id="notify-member-copy" class="canva-text" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Notifikasi saat anggota jemaat baru dicatat.</p>
+            </div><label class="switch"><input id="notify-member" type="checkbox"><span class="slider"></span></label>
+           </div>
+           <div class="setting-row">
+            <div>
+             <h3 data-template-id="notify-visit-title" class="canva-text" style="color: rgb(36, 57, 70); font-weight: 700; font-style: normal; font-size: 18px;">Jadwal dan tindak lanjut kunjungan</h3>
+             <p data-template-id="notify-visit-copy" class="canva-text" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Notifikasi untuk kunjungan yang perlu ditindaklanjuti.</p>
+            </div><label class="switch"><input id="notify-visit" type="checkbox"><span class="slider"></span></label>
+           </div>
+           <div class="setting-row">
+            <div>
+             <h3 data-template-id="notify-attendance-title" class="canva-text" style="color: rgb(36, 57, 70); font-weight: 700; font-style: normal; font-size: 18px;">Pengingat pencatatan kehadiran</h3>
+             <p data-template-id="notify-attendance-copy" class="canva-text" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Pengingat saat pencatatan kehadiran diperlukan.</p>
+            </div><label class="switch"><input id="notify-attendance" type="checkbox"><span class="slider"></span></label>
+           </div>
+           <div class="setting-row">
+            <div>
+             <h3 data-template-id="notify-report-title" class="canva-text" style="color: rgb(36, 57, 70); font-weight: 700; font-style: normal; font-size: 18px;">Laporan periode tertentu</h3>
+             <p data-template-id="notify-report-copy" class="canva-text" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Notifikasi ketersediaan ringkasan laporan.</p>
+            </div><label class="switch"><input id="notify-report" type="checkbox"><span class="slider"></span></label>
+           </div>
+           <div class="setting-row">
+            <div>
+             <h3 data-template-id="notify-activity-title" class="canva-text" style="color: rgb(36, 57, 70); font-weight: 700; font-style: normal; font-size: 18px;">Aktivitas pengguna</h3>
+             <p data-template-id="notify-activity-copy" class="canva-text" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Notifikasi perubahan penting pada sistem.</p>
+            </div><label class="switch"><input id="notify-activity" type="checkbox"><span class="slider"></span></label>
+           </div>
+           <div class="mt-5 flex justify-end">
+            <button id="notifications-save" data-template-id="save-notification-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Perubahan</button>
+           </div>
+          </form>
+         </div>
+        </section>
+        <section id="appearance-settings" class="settings-panel">
+         <div class="panel">
+          <h2 data-template-id="appearance-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Tampilan Website</h2>
+          <p data-template-id="appearance-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Sesuaikan identitas visual dan kenyamanan tampilan administrasi.</p>
+          <form id="appearance-form" class="mt-6">
+           <div class="form-grid">
+            <div class="form-group">
+             <label data-template-id="appearance-primary-label" class="canva-text" for="appearance-primary" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Warna Utama</label><input id="appearance-primary" class="field" type="color" value="#092f55">
+            </div>
+            <div class="form-group">
+             <label data-template-id="appearance-accent-label" class="canva-text" for="appearance-accent" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Warna Aksen</label><input id="appearance-accent" class="field" type="color" value="#d5ad57">
+            </div>
+            <div class="form-group">
+             <label data-template-id="appearance-mode-label" class="canva-text" for="appearance-mode" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Mode Tampilan</label><select id="appearance-mode" class="field"><option value="light">Mode terang</option><option value="dark">Mode gelap</option></select>
+            </div>
+            <div class="form-group">
+             <label data-template-id="appearance-scale-label" class="canva-text" for="appearance-scale" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Ukuran Tampilan</label><select id="appearance-scale" class="field"><option value="normal">Normal</option><option value="large">Besar</option><option value="compact">Ringkas</option></select>
+            </div>
+            <div class="form-group">
+             <label data-template-id="appearance-sidebar-label" class="canva-text" for="appearance-sidebar" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Tampilan Sidebar</label><select id="appearance-sidebar" class="field"><option value="expanded">Diperluas</option><option value="compact">Ringkas</option></select>
+            </div>
+            <div class="form-group">
+             <label data-template-id="appearance-dashboard-label" class="canva-text" for="appearance-dashboard" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Tampilan Dashboard</label><select id="appearance-dashboard" class="field"><option value="summary">Ringkasan</option><option value="detailed">Detail</option></select>
+            </div>
+           </div>
+           <div class="mt-5 flex justify-end gap-2 flex-wrap"><button id="appearance-reset" data-template-id="reset-appearance-button" class="canva-button secondary" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px; width: auto;">Reset ke Pengaturan Awal</button> <button id="appearance-save" data-template-id="save-appearance-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Perubahan</button>
+           </div>
+          </form>
+         </div>
+        </section>
+        <section id="security-settings" class="settings-panel">
+         <div class="panel">
+          <h2 data-template-id="security-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Keamanan</h2>
+          <p data-template-id="security-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Kelola sesi pengguna dan pantau aktivitas nyata yang tercatat pada sistem.</p>
+          <div class="inline-note mt-5">
+           <span data-template-id="security-note" class="canva-text" style="color: rgb(83, 103, 114); font-weight: 400; font-style: normal; font-size: 15px;">Sistem tidak menyimpan password. Pengelolaan password dan autentikasi dilakukan melalui akun Canva untuk menjaga keamanan pengguna.</span>
+          </div>
+          <div class="setting-row">
+           <div>
+            <h3 data-template-id="security-session-title" class="canva-text" style="color: rgb(36, 57, 70); font-weight: 700; font-style: normal; font-size: 18px;">Pengaturan Sesi Pengguna</h3>
+            <p data-template-id="security-session-copy" class="canva-text" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Tentukan durasi sesi administrasi yang diinginkan.</p>
+           </div><select id="session-duration" class="field" style="max-width:165px"><option>8 jam</option><option>24 jam</option><option>7 hari</option></select>
+          </div>
+          <div class="setting-row">
+           <div>
+            <h3 data-template-id="security-all-devices-title" class="canva-text" style="color: rgb(36, 57, 70); font-weight: 700; font-style: normal; font-size: 18px;">Logout dari Semua Perangkat</h3>
+            <p data-template-id="security-all-devices-copy" class="canva-text" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Tandai permintaan logout untuk seluruh perangkat administrasi.</p>
+           </div><button id="logout-all-devices" data-template-id="logout-all-button" class="canva-button danger-button" type="button" style="background: rgb(253, 240, 240); color: rgb(158, 48, 48); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Logout Semua</button>
+          </div>
+          <hr class="section-line">
+          <h3 data-template-id="activity-log-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 18px;">Log Aktivitas</h3>
+          <p data-template-id="activity-log-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Riwayat aktivitas akan muncul otomatis berdasarkan penggunaan nyata dalam sistem.</p>
+          <div id="activity-log-list" class="activity-list mt-3"></div>
+          <p id="activity-log-empty" data-template-id="activity-log-empty" class="canva-text empty" style="color: rgb(123, 137, 147); font-weight: 400; font-style: normal; font-size: 15px;">Belum ada aktivitas pengguna yang tercatat.</p>
+          <div class="mt-5 flex justify-end">
+           <button id="security-save" data-template-id="save-security-button" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Perubahan</button>
+          </div>
+         </div>
+        </section>
+        <section id="backup-settings" class="settings-panel">
+         <div class="panel">
+          <h2 data-template-id="backup-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Backup &amp; Data</h2>
+          <p data-template-id="backup-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Unduh data administrasi sebagai backup atau simpan ke Google Sheets.</p>
+          <div class="warning-note mt-5">
+           <span data-template-id="backup-warning" class="canva-text" style="color: rgb(120, 93, 39); font-weight: 400; font-style: normal; font-size: 15px;">Tindakan ini akan membackup semua data yang ada ke sistem eksternal. Pastikan koneksi internet Anda stabil.</span>
+          </div>
+          <div class="grid4 mt-5"><button id="backup-data" data-template-id="backup-button" class="canva-button secondary flex-col py-5" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 700;"><i data-lucide="archive"></i><span data-template-id="backup-label" class="canva-text" style="color: rgb(21, 59, 91); font-weight: 700; font-style: normal; font-size: 15px;">Backup ke Sheet</span></button> <button id="export-data" data-template-id="export-data-button" class="canva-button secondary flex-col py-5" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 700;"><i data-lucide="file-down"></i><span data-template-id="export-data-label" class="canva-text" style="color: rgb(21, 59, 91); font-weight: 700; font-style: normal; font-size: 15px;">Export Data</span></button> <button id="download-report" data-template-id="download-report-button" class="canva-button secondary flex-col py-5" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 700;"><i data-lucide="file-text"></i><span data-template-id="download-report-label" class="canva-text" style="color: rgb(21, 59, 91); font-weight: 700; font-style: normal; font-size: 15px;">Download Laporan</span></button> <button id="restore-data" data-template-id="restore-button" class="canva-button danger-button flex-col py-5" type="button" style="background: rgb(253, 240, 240); color: rgb(158, 48, 48); font-weight: 700;"><i data-lucide="rotate-ccw"></i><span data-template-id="restore-label" class="canva-text" style="color: rgb(158, 48, 48); font-weight: 700; font-style: normal; font-size: 15px;">Restore Data</span></button>
+          </div>
+         </div>
+        </section>
+        <section id="system-settings" class="settings-panel">
+         <div class="panel">
+          <h2 data-template-id="system-settings-title" class="canva-text panel-title" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Pengaturan Sistem</h2>
+          <p data-template-id="system-settings-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Sesuaikan format administrasi dan tampilan data sistem.</p>
+          <form id="system-form" class="mt-6">
+           <div class="form-grid">
+            <div class="form-group">
+             <label data-template-id="system-language-label" class="canva-text" for="system-language" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Bahasa</label><select id="system-language" class="field"><option>Bahasa Indonesia</option></select>
+            </div>
+            <div class="form-group">
+             <label data-template-id="system-date-label" class="canva-text" for="system-date" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Format Tanggal</label><select id="system-date" class="field"><option>DD/MM/YYYY</option><option>DD MMMM YYYY</option></select>
+            </div>
+            <div class="form-group">
+             <label data-template-id="system-timezone-label" class="canva-text" for="system-timezone" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Zona Waktu</label><select id="system-timezone" class="field"><option>WIB (UTC+07:00)</option><option>WITA (UTC+08:00)</option></select>
+            </div>
+            <div class="form-group">
+             <label data-template-id="system-report-label" class="canva-text" for="system-report" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Format Laporan</label><select id="system-report" class="field"><option>Ringkasan</option><option>Detail</option></select>
+            </div>
+            <div class="form-group">
+             <label data-template-id="system-table-label" class="canva-text" for="system-table" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Tampilan Tabel</label><select id="system-table" class="field"><option>Nyaman</option><option>Ringkas</option></select>
+            </div>
+            <div class="form-group">
+             <label data-template-id="system-page-size-label" class="canva-text" for="system-page-size" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Jumlah Data per Halaman</label><select id="system-page-size" class="field"><option>10</option><option>25</option><option>50</option></select>
+            </div>
+           </div>
+           <div class="mt-5 flex justify-end">
+            <button id="system-save" data-template-id="save-system-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Perubahan</button>
+           </div>
           </form>
          </div>
         </section>
         <section id="about-settings" class="settings-panel">
          <div class="panel">
-          <h2 class="panel-title">Tentang Sistem</h2>
-          <p class="mt-2 text-sm text-slate-600">Sistem administrasi gereja terintegrasi QR Absensi dan Google Sheets.</p>
+          <p data-template-id="about-kicker" class="canva-text eyebrow" style="color: rgb(184, 134, 49); font-weight: 700; font-style: normal; font-size: 15px;">Tentang Sistem</p>
+          <h2 data-template-id="about-name" class="canva-text serif text-3xl m-0" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">GKY Singkawang</h2>
+          <p data-template-id="about-full-name" class="canva-text mt-2 text-slate-600" style="color: rgb(83, 103, 114); font-weight: 600; font-style: normal; font-size: 15px;">Gereja Kristus Yesus</p>
+          <p data-template-id="about-description" class="canva-text mt-5 text-sm text-slate-600" style="color: rgb(83, 103, 114); font-weight: 400; font-style: normal; font-size: 15px;">Sistem administrasi gereja untuk membantu pengelolaan anggota, kehadiran, kunjungan pastoral, komisi pelayanan, dan laporan secara terstruktur.</p>
+          <hr class="section-line">
+          <div class="form-grid">
+           <div class="card">
+            <p data-template-id="about-version-label" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Versi Sistem</p><strong data-template-id="about-version" class="canva-text block mt-2" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 15px;">Versi 5.0</strong>
+           </div>
+           <div class="card">
+            <p data-template-id="about-update-label" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Informasi Pembaruan</p><strong data-template-id="about-update" class="canva-text block mt-2" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 15px;">Pengaturan administrasi terintegrasi</strong>
+           </div>
+          </div>
+          <div class="mt-6 flex gap-2 flex-wrap"><button id="privacy-info" data-template-id="privacy-button" class="canva-button secondary" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px; width: auto;">Kebijakan Privasi</button> <button id="terms-info" data-template-id="terms-button" class="canva-button secondary" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px; width: auto;">Ketentuan Penggunaan</button>
+          </div>
          </div>
         </section>
        </div>
@@ -413,78 +648,224 @@
     </main>
    </div>
   </div>
-
-  <!-- Modal QR Code Generator Anggota (BARU) -->
-  <div id="qr-modal" class="modal-layer" role="dialog">
-   <div class="modal text-center">
-    <div class="modal-head">
-     <div>
-      <h2 class="serif text-2xl m-0 font-bold text-slate-800">QR Code Anggota</h2>
-      <p class="panel-sub">Gunakan QR ini untuk keperluan absen jemaat.</p>
-     </div>
-     <button class="close" data-close="qr-modal" type="button"><i data-lucide="x"></i></button>
-    </div>
-    <div class="py-4 flex flex-col items-center justify-center">
-      <div id="qrcode-container" class="p-3 bg-white border rounded-xl shadow inline-block"></div>
-      <h3 id="qr-member-name" class="font-bold text-lg mt-3 text-slate-800"></h3>
-      <p id="qr-member-details" class="text-xs text-slate-500 mt-1"></p>
-    </div>
-    <div class="mt-4 flex justify-end">
-     <button class="canva-button secondary" data-close="qr-modal" type="button" style="width: auto;">Tutup</button>
-    </div>
-   </div>
-  </div>
-
-  <!-- Modal Tambah Anggota -->
-  <div id="member-modal" class="modal-layer" role="dialog">
+  <div id="member-modal" class="modal-layer" role="dialog" aria-modal="true" aria-labelledby="member-modal-title">
    <div class="modal">
     <div class="modal-head">
      <div>
-      <h2 class="serif text-2xl m-0" style="color: rgb(28, 46, 59); font-weight: 700;">Tambah Anggota Jemaat</h2>
-      <p class="panel-sub">Lengkapi data anggota untuk pengelompokan pelayanan.</p>
-     </div><button class="close" data-close="member-modal" type="button"><i data-lucide="x"></i></button>
+      <h2 id="member-modal-title" data-template-id="member-form-title" class="canva-text serif text-2xl m-0" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Tambah Anggota Jemaat</h2>
+      <p data-template-id="member-form-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Lengkapi data anggota untuk pengelompokan pelayanan.</p>
+     </div><button class="close" data-close="member-modal" type="button" aria-label="Tutup"><i data-lucide="x"></i></button>
     </div>
     <form id="member-form">
      <div class="form-grid">
-      <div class="form-group"><label>Nama Lengkap</label><input id="m-name" class="field" required></div>
-      <div class="form-group"><label>Komisi</label><select id="m-commission" class="field" required></select></div>
-      <div class="form-group"><label>Nomor Telepon</label><input id="m-phone" class="field" type="tel"></div>
-      <div class="form-group"><label>Status Keanggotaan</label><select id="m-status" class="field"><option>Aktif</option><option>Tidak Aktif</option></select></div>
-      <div class="form-group full"><label>Alamat</label><textarea id="m-address" class="field textarea"></textarea></div>
+      <div class="form-group">
+       <label data-template-id="member-name-label" class="canva-text" for="m-name" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nama Lengkap</label><input id="m-name" class="field" required="">
+      </div>
+      <div class="form-group">
+       <label data-template-id="member-commission-label" class="canva-text" for="m-commission" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Komisi</label><select id="m-commission" class="field" required=""></select>
+      </div>
+      <div class="form-group">
+       <label data-template-id="member-phone-label" class="canva-text" for="m-phone" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nomor Telepon</label><input id="m-phone" class="field" type="tel">
+      </div>
+      <div class="form-group">
+       <label data-template-id="member-status-label" class="canva-text" for="m-status" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Status Keanggotaan</label><select id="m-status" class="field"><option>Aktif</option><option>Tidak Aktif</option><option>Dalam Pemantauan</option></select>
+      </div>
+      <div class="form-group full">
+       <label data-template-id="member-address-label" class="canva-text" for="m-address" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Alamat</label><textarea id="m-address" class="field textarea"></textarea>
+      </div>
+      <div class="form-group full">
+       <label data-template-id="member-notes-label" class="canva-text" for="m-notes" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Catatan</label><textarea id="m-notes" class="field textarea"></textarea>
+      </div>
      </div>
+     <div id="member-feedback" class="feedback" role="status"></div>
      <div class="mt-5 flex justify-end gap-2">
-      <button class="canva-button secondary" data-close="member-modal" type="button" style="width: auto;">Batal</button>
-      <button id="member-save" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;">Simpan Anggota</button>
+      <button data-template-id="member-cancel-button" class="canva-button secondary" data-close="member-modal" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px; width: auto;">Batal</button><button id="member-save" data-template-id="member-save-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Anggota</button>
      </div>
     </form>
    </div>
   </div>
-
-  <!-- Modal Kehadiran & Kunjungan standar lainnya (disingkat agar ringkas, fungsi utama tetap lengkap) -->
-  <div id="toast" class="toast" role="status">
-   <i data-lucide="check-circle"></i><span style="color: #fff; font-weight: 700;">Perubahan berhasil disimpan.</span>
+  <div id="attendance-modal" class="modal-layer" role="dialog" aria-modal="true" aria-labelledby="attendance-modal-title">
+   <div class="modal">
+    <div class="modal-head">
+     <div>
+      <h2 id="attendance-modal-title" data-template-id="attendance-form-title" class="canva-text serif text-2xl m-0" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Catat Kehadiran</h2>
+      <p data-template-id="attendance-form-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Simpan kehadiran aktual untuk statistik komisi.</p>
+     </div><button class="close" data-close="attendance-modal" type="button" aria-label="Tutup"><i data-lucide="x"></i></button>
+    </div>
+    <form id="attendance-form">
+     <div class="form-grid">
+      <div class="form-group">
+       <label data-template-id="attendance-service-label" class="canva-text" for="a-service" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Jenis Ibadah</label><select id="a-service" class="field" required=""></select>
+      </div>
+      <div class="form-group">
+       <label data-template-id="attendance-name-label" class="canva-text" for="a-count" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Jumlah Hadir</label><input id="a-count" class="field" type="number" min="0" step="1" required="">
+      </div>
+      <div class="form-group">
+       <label data-template-id="attendance-date-label" class="canva-text" for="a-date" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Tanggal Kehadiran</label><input id="a-date" class="field" type="date" required="">
+      </div>
+      <div class="form-group full">
+       <label data-template-id="attendance-evaluation-label" class="canva-text" for="a-evaluation" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Evaluasi Kehadiran</label><textarea id="a-evaluation" class="field textarea"></textarea>
+      </div>
+     </div>
+     <div class="mt-5 flex justify-end gap-2">
+      <button data-template-id="attendance-cancel-button" class="canva-button secondary" data-close="attendance-modal" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px; width: auto;">Batal</button><button id="attendance-save" data-template-id="attendance-save-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Kehadiran</button>
+     </div>
+    </form>
+   </div>
   </div>
-
+  <div id="visit-modal" class="modal-layer" role="dialog" aria-modal="true" aria-labelledby="visit-modal-title">
+   <div class="modal">
+    <div class="modal-head">
+     <div>
+      <h2 id="visit-modal-title" data-template-id="visit-form-title" class="canva-text serif text-2xl m-0" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Tambah Kunjungan Jemaat</h2>
+      <p data-template-id="visit-form-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Lengkapi catatan kunjungan untuk pemantauan pastoral.</p>
+     </div><button class="close" data-close="visit-modal" type="button" aria-label="Tutup"><i data-lucide="x"></i></button>
+    </div>
+    <form id="visit-form">
+     <div class="form-grid">
+      <div class="form-group">
+       <label data-template-id="visit-member-label" class="canva-text" for="v-member" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nama Jemaat</label><input id="v-member" class="field" required="">
+      </div>
+      <div class="form-group">
+       <label data-template-id="visit-commission-label" class="canva-text" for="v-commission" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Komisi</label><select id="v-commission" class="field" required=""></select>
+      </div>
+      <div class="form-group">
+       <label data-template-id="visit-date-label" class="canva-text" for="v-date" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Tanggal Kunjungan</label><input id="v-date" class="field" type="date" required="">
+      </div>
+      <div class="form-group">
+       <label data-template-id="visit-status-label" class="canva-text" for="v-status" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Status Kunjungan</label><select id="v-status" class="field"><option>Sudah Dikunjungi</option><option>Perlu Kunjungan Kembali</option><option>Dalam Pemantauan</option><option>Selesai</option></select>
+      </div>
+      <div class="form-group full">
+       <label data-template-id="visit-notes-label" class="canva-text" for="v-notes" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Catatan Kunjungan</label><textarea id="v-notes" class="field textarea"></textarea>
+      </div>
+     </div>
+     <div class="mt-5 flex justify-end gap-2">
+      <button data-template-id="visit-cancel-button" class="canva-button secondary" data-close="visit-modal" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px; width: auto;">Batal</button><button id="visit-save" data-template-id="visit-save-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Kunjungan</button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <div id="user-modal" class="modal-layer" role="dialog" aria-modal="true" aria-labelledby="user-modal-title">
+   <div class="modal">
+    <div class="modal-head">
+     <div>
+      <h2 id="user-modal-title" data-template-id="user-form-title" class="canva-text serif text-2xl m-0" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Tambah Pengguna</h2>
+      <p data-template-id="user-form-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Tentukan profil, role, status, dan hak akses pengguna.</p>
+     </div><button class="close" data-close="user-modal" type="button" aria-label="Tutup"><i data-lucide="x"></i></button>
+    </div>
+    <form id="user-form">
+     <div class="form-grid">
+      <div class="form-group">
+       <label data-template-id="user-name-label" class="canva-text" for="u-name" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nama</label><input id="u-name" class="field" required="">
+      </div>
+      <div class="form-group">
+       <label data-template-id="user-username-label" class="canva-text" for="u-username" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Username</label><input id="u-username" class="field" required="">
+      </div>
+      <div class="form-group">
+       <label data-template-id="user-email-label" class="canva-text" for="u-email" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Email</label><input id="u-email" class="field" type="email">
+      </div>
+      <div class="form-group">
+       <label data-template-id="user-phone-label" class="canva-text" for="u-phone" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nomor Telepon</label><input id="u-phone" class="field" type="tel">
+      </div>
+      <div class="form-group">
+       <label data-template-id="user-role-label" class="canva-text" for="u-role" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Role</label><select id="u-role" class="field"><option>Super Admin</option><option>Admin</option><option>Pengurus</option><option>Pelayan</option></select>
+      </div>
+      <div class="form-group">
+       <label data-template-id="user-status-label" class="canva-text" for="u-status" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Status Akun</label><select id="u-status" class="field"><option>Aktif</option><option>Nonaktif</option></select>
+      </div>
+      <div class="form-group full"><label data-template-id="user-access-label" class="canva-text" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Hak Akses</label>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700"><label><input type="checkbox" value="Melihat data anggota" class="u-permission"> Melihat data anggota</label> <label><input type="checkbox" value="Menambahkan anggota" class="u-permission"> Menambahkan anggota</label> <label><input type="checkbox" value="Mengedit anggota" class="u-permission"> Mengedit anggota</label> <label><input type="checkbox" value="Menghapus anggota" class="u-permission"> Menghapus anggota</label> <label><input type="checkbox" value="Melihat kehadiran" class="u-permission"> Melihat kehadiran</label> <label><input type="checkbox" value="Mengelola kehadiran" class="u-permission"> Mengelola kehadiran</label> <label><input type="checkbox" value="Mengelola kunjungan" class="u-permission"> Mengelola kunjungan</label> <label><input type="checkbox" value="Melihat laporan" class="u-permission"> Melihat laporan</label> <label><input type="checkbox" value="Mengelola komisi" class="u-permission"> Mengelola komisi</label> <label><input type="checkbox" value="Mengelola pengguna" class="u-permission"> Mengelola pengguna</label> <label><input type="checkbox" value="Mengakses pengaturan" class="u-permission"> Mengakses pengaturan</label>
+       </div>
+      </div>
+     </div>
+     <div class="inline-note mt-5">
+      <span data-template-id="user-security-note" class="canva-text" style="color: rgb(83, 103, 114); font-weight: 400; font-style: normal; font-size: 15px;">Sistem tidak meminta atau menyimpan password pengguna. Akses akun dikelola melalui lingkungan Canva.</span>
+     </div>
+     <div class="mt-5 flex justify-end gap-2">
+      <button data-template-id="user-cancel-button" class="canva-button secondary" data-close="user-modal" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px; width: auto;">Batal</button><button id="user-save" data-template-id="user-save-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Pengguna</button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <div id="commission-modal" class="modal-layer" role="dialog" aria-modal="true" aria-labelledby="commission-modal-title">
+   <div class="modal">
+    <div class="modal-head">
+     <div>
+      <h2 id="commission-modal-title" data-template-id="commission-form-title" class="canva-text serif text-2xl m-0" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Tambah Komisi</h2>
+      <p data-template-id="commission-form-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Komisi baru akan tersedia pada seluruh formulir administrasi.</p>
+     </div><button class="close" data-close="commission-modal" type="button" aria-label="Tutup"><i data-lucide="x"></i></button>
+    </div>
+    <form id="commission-form">
+     <div class="form-group">
+      <label data-template-id="commission-name-label" class="canva-text" for="new-commission-name" style="color: rgb(66, 83, 95); font-weight: 700; font-style: normal; font-size: 15px;">Nama Komisi</label><input id="new-commission-name" class="field" required="">
+     </div>
+     <div class="mt-5 flex justify-end gap-2">
+      <button data-template-id="commission-cancel-button" class="canva-button secondary" data-close="commission-modal" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px; width: auto;">Batal</button><button id="commission-save" data-template-id="commission-save-button" class="canva-button primary" type="submit" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Simpan Komisi</button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <div id="confirm-modal" class="modal-layer" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title">
+   <div class="modal">
+    <div class="modal-head">
+     <div>
+      <h2 id="confirm-modal-title" data-template-id="confirm-title" class="canva-text serif text-2xl m-0" style="color: rgb(28, 46, 59); font-weight: 700; font-style: normal; font-size: 23px;">Konfirmasi Tindakan</h2>
+      <p id="confirm-message" data-template-id="confirm-copy" class="canva-text panel-sub" style="color: rgb(120, 134, 144); font-weight: 400; font-style: normal; font-size: 15px;">Pastikan tindakan ini sudah sesuai.</p>
+     </div><button class="close" data-close="confirm-modal" type="button" aria-label="Tutup"><i data-lucide="x"></i></button>
+    </div>
+    <div class="warning-note">
+     <span data-template-id="confirm-warning" class="canva-text" style="color: rgb(120, 93, 39); font-weight: 400; font-style: normal; font-size: 15px;">Tindakan ini dapat memengaruhi data dalam sistem. Pastikan Anda memahami tindakan yang akan dilakukan.</span>
+    </div>
+    <div class="mt-5 flex justify-end gap-2">
+     <button data-template-id="confirm-cancel-button" class="canva-button secondary" data-close="confirm-modal" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; font-style: normal; font-size: 15px; width: auto;">Batal</button><button id="confirm-action" data-template-id="confirm-action-button" class="canva-button danger-button" type="button" style="background: rgb(253, 240, 240); color: rgb(158, 48, 48); font-weight: 700; font-style: normal; font-size: 15px; width: auto;">Ya, Lanjutkan</button>
+    </div>
+   </div>
+  </div>
+  <div id="toast" class="toast" role="status">
+   <i data-lucide="check-circle"></i><span data-template-id="save-success-message" class="canva-text" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 15px;">Perubahan berhasil disimpan.</span>
+  </div>
+  <script src="/_sdk/b734a45e60e3c20c.editing_sdk.js" integrity="sha512-kpJ9bUO4jCpmh+BAXwtHIbXfmgZA27VuEZXTWu6TKDzOyQ5ZV/O4BUWISXqmtjjmNUGf5mAIT+uxslwWjRuDBA=="></script>
   <script>
     const $ = id => document.getElementById(id);
     const DEFAULT_COMMISSIONS = ["Anggota Jemaat","Komisi Remaja","Komisi Sekolah Minggu","Komisi Alpha Course","Komisi Wanita"];
+    const ATTENDANCE_TYPES = ["KU 1","KU 2","Persekutuan Doa","Komisi Sekolah Minggu","Komisi Remaja","Komisi Wanita","Komisi Alpha Course"];
     let records = [];
     let configRecords = {};
+    let pendingAction = null;
     let editingRecord = null;
-    let html5QrCode = null;
-
+// --- BYPASS UNTUK MENCEGAH ERROR DATA SDK ---
     if (typeof window.dataSdk === 'undefined') {
+      console.log("Data SDK asli tidak ditemukan, menggunakan sistem lokal...");
       window.dataSdk = {
-        init: async (config) => { if(config.onDataChanged) config.onDataChanged(records); return {isOk: true}; },
-        create: async (r) => { r.__backendId = Date.now().toString() + Math.random().toString(36).substr(2, 5); records.push(r); renderAll(); return {isOk: true}; },
-        update: async (r) => { const i = records.findIndex(x => x.__backendId === r.__backendId); if(i > -1) records[i] = r; renderAll(); return {isOk: true}; },
-        delete: async (r) => { records = records.filter(x => x.__backendId !== r.__backendId); renderAll(); return {isOk: true}; }
+        init: async (config) => { 
+          if(config.onDataChanged) config.onDataChanged(records); 
+          return {isOk: true}; 
+        },
+        create: async (r) => { 
+          r.__backendId = Date.now().toString() + Math.random().toString(36).substr(2, 5); 
+          records.push(r); 
+          if(typeof renderAll === 'function') renderAll(); 
+          return {isOk: true}; 
+        },
+        update: async (r) => { 
+          const i = records.findIndex(x => x.__backendId === r.__backendId); 
+          if(i > -1) records[i] = r; 
+          if(typeof renderAll === 'function') renderAll(); 
+          return {isOk: true}; 
+        },
+        delete: async (r) => { 
+          records = records.filter(x => x.__backendId !== r.__backendId); 
+          if(typeof renderAll === 'function') renderAll(); 
+          return {isOk: true}; 
+        }
       };
     }
-
+    // --------------------------------------------
     const members = () => records.filter(r => r.record_type === "member");
     const attendances = () => records.filter(r => r.record_type === "attendance");
     const visits = () => records.filter(r => r.record_type === "visit");
+    const users = () => records.filter(r => r.record_type === "user");
+    const activities = () => records.filter(r => r.record_type === "activity");
     const commissions = () => {
       const custom = records.filter(r => r.record_type === "commission" && r.membership_status !== "Nonaktif").map(r => r.commission).filter(Boolean);
       return [...new Set([...DEFAULT_COMMISSIONS, ...custom])];
@@ -492,26 +873,84 @@
 
     function openModal(id){ $(id).classList.add("show"); }
     function closeModal(id){ $(id).classList.remove("show"); }
-    function showToast(){ $("toast").classList.add("show"); setTimeout(() => $("toast").classList.remove("show"), 3200); }
-    function escapeHtml(val){ return String(val || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c])); }
+    function showToast(){
+      $("toast").classList.add("show");
+      setTimeout(() => $("toast").classList.remove("show"), 3200);
+    }
+    function escapeHtml(value){
+      return String(value || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+    }
     function today(){ return new Date().toISOString().slice(0,10); }
-    function blankRecord(type){ return { record_type:type, member_name:"", commission:"", phone:"", address:"", membership_status:"Aktif", attendance_count:0, present:false, attendance_date:today() }; }
+    function formatDate(value){
+      if(!value) return "—";
+      return new Intl.DateTimeFormat("id-ID",{day:"2-digit",month:"short",year:"numeric"}).format(new Date(value + "T00:00:00"));
+    }
+    function blankRecord(type){
+      return {
+        record_type:type,member_name:"",gender:"",birth_date:"",commission:"",phone:"",attendance_count:0,
+        address:"",membership_status:"",join_date:"",notes:"",visit_date:"",
+        visitor_name:"",prayer_needs:"",struggles:"",visit_notes:"",visit_status:"",
+        attendance_date:"",present:false
+      };
+    }
+    function getSetting(key, fallback={}){
+      const r = configRecords[key];
+      if(!r) return fallback;
+      try { return JSON.parse(r.notes || "{}"); } catch(e) { return fallback; }
+    }
+    async function saveSetting(key, data, button){
+      if(button) button.disabled = true;
+      const old = configRecords[key];
+      const record = old ? {...old} : blankRecord("setting");
+      record.record_type = "setting";
+      record.member_name = key;
+      record.notes = JSON.stringify(data);
+      const result = old ? await window.dataSdk.update(record) : await window.dataSdk.create(record);
+      if(button) button.disabled = false;
+      if(result.isOk){
+        showToast();
+        logActivity("Perubahan pengaturan", key);
+      }
+      return result.isOk;
+    }
+    async function logActivity(title, detail){
+      if(!window.dataSdk || records.length >= 999) return;
+      const r = blankRecord("activity");
+      r.member_name = title;
+      r.notes = detail;
+      r.join_date = new Date().toISOString();
+      await window.dataSdk.create(r);
+    }
 
+    // --- FUNGSI MENGIRIM DATA KE SHEETDB ---
     function saveToSheetDB(dataObj) {
       fetch("https://sheetdb.io/api/v1/zbulood5cnxxx", {
         method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ data: [dataObj] })
-      }).catch(err => console.log("SheetDB error: " + err.message));
+      })
+      .then(response => {
+        if (!response.ok) console.log("Gagal dari SheetDB, cek kolom atau koneksi.");
+        else console.log("Berhasil masuk ke Google Sheets!");
+      })
+      .catch(error => {
+        console.log("Koneksi ditolak oleh browser/keamanan: " + error.message);
+      });
     }
 
+    // --- TAB SWITCH LOGIN / REGISTER ---
     window.switchAuthTab = function(tab) {
       if(tab === 'login') {
-        $('login-form').classList.remove('hidden'); $('register-form').classList.add('hidden');
+        $('login-form').classList.remove('hidden');
+        $('register-form').classList.add('hidden');
         $('tab-login-btn').className = "flex-1 py-1.5 text-xs font-bold rounded bg-amber-500 text-slate-900 transition";
         $('tab-register-btn').className = "flex-1 py-1.5 text-xs font-bold rounded bg-slate-700 text-white transition";
       } else {
-        $('login-form').classList.add('hidden'); $('register-form').classList.remove('hidden');
+        $('login-form').classList.add('hidden');
+        $('register-form').classList.remove('hidden');
         $('tab-login-btn').className = "flex-1 py-1.5 text-xs font-bold rounded bg-slate-700 text-white transition";
         $('tab-register-btn').className = "flex-1 py-1.5 text-xs font-bold rounded bg-amber-500 text-slate-900 transition";
       }
@@ -520,15 +959,71 @@
     function populateCommissionSelect(selectId, includeAll=false){
       const select = $(selectId);
       if(!select) return;
+      const selected = select.value;
       select.innerHTML = (includeAll ? "<option value=''>Semua komisi</option>" : "<option value=''>Pilih komisi</option>") +
         commissions().map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+      if([...select.options].some(o => o.value === selected)) select.value = selected;
     }
+    function populateAllCommissionInputs(){
+      ["m-commission","v-commission","member-commission-filter"].forEach(id => populateCommissionSelect(id, id === "member-commission-filter"));
+      const service = $("a-service");
+      if(service){
+        const selected = service.value;
+        service.innerHTML = ATTENDANCE_TYPES.map(type => `<option value="${escapeHtml(type)}">${escapeHtml(type)}</option>`).join("");
+        if([...service.options].some(o => o.value === selected)) service.value = selected;
+      }
+      const multi = $("attendance-commission-setting");
+      if(multi){
+        const selected = [...multi.selectedOptions].map(o => o.value);
+        multi.innerHTML = commissions().map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+        [...multi.options].forEach(o => o.selected = selected.includes(o.value));
+      }
+    }
+    function applyChurchProfile(){
+      const profile = getSetting("church_profile", {});
+      if(profile.short_name){
+        $("church-name-side").textContent = profile.short_name;
+        $("dashboard-church-summary").textContent = `${profile.short_name} — pantau data jemaat, kehadiran, dan pelayanan pastoral dalam satu tempat.`;
+      }
+    }
+    function applyAppearance(){
+      const appearance = getSetting("appearance", {});
+      if(appearance.primary) document.documentElement.style.setProperty("--navy", appearance.primary);
+      if(appearance.accent) document.documentElement.style.setProperty("--gold", appearance.accent);
+      document.body.style.fontSize = appearance.scale === "large" ? "17px" : appearance.scale === "compact" ? "14px" : "15px";
+      if(appearance.mode === "dark"){
+        document.documentElement.style.setProperty("--mist","#17212b");
+        document.documentElement.style.setProperty("--ink","#eff6fb");
+      } else {
+        document.documentElement.style.setProperty("--mist","#f4f6f8");
+        document.documentElement.style.setProperty("--ink","#17212b");
+      }
+    }
+    function renderDashboard(){
+      $("metric-members").textContent = members().length;
+      $("metric-commissions").textContent = commissions().length;
+      $("metric-attendance").textContent = attendances().filter(a => a.present).length;
+      $("metric-visits").textContent = visits().length;
 
+      const holder = $("commission-cards");
+      holder.innerHTML = commissions().map(c => `
+        <article class="card metric">
+          <p>${escapeHtml(c)}</p>
+          <strong>${members().filter(m => m.commission === c).length}</strong>
+        </article>`).join("");
+
+      const activityHolder = $("dashboard-activities");
+      const latest = [...activities()].sort((a,b) => String(b.join_date).localeCompare(String(a.join_date))).slice(0,5);
+      activityHolder.innerHTML = latest.length ? latest.map(a => `
+        <div class="activity-row">
+          <strong>${escapeHtml(a.member_name)}</strong>
+          <small>${escapeHtml(a.notes)} · ${a.join_date ? new Date(a.join_date).toLocaleString("id-ID") : ""}</small>
+        </div>`).join("") : `<p class="empty">Belum ada aktivitas sistem yang tercatat.</p>`;
+    }
     function renderMembers(){
       const query = $("member-search").value.toLowerCase();
       const commission = $("member-commission-filter").value;
       const list = members().filter(m => (!query || m.member_name.toLowerCase().includes(query)) && (!commission || m.commission === commission));
-      
       $("member-body").innerHTML = list.map(m => `
         <tr>
           <td><strong>${escapeHtml(m.member_name)}</strong></td>
@@ -536,164 +1031,454 @@
           <td>${escapeHtml(m.phone) || "—"}</td>
           <td>${escapeHtml(m.address) || "—"}</td>
           <td><span class="status">${escapeHtml(m.membership_status || "Aktif")}</span></td>
-          <td>
-            <button class="link-btn text-amber-600 font-bold" type="button" onclick="showMemberQR('${m.__backendId}')">QR</button>
-            <button class="link-btn" type="button" onclick="editMember('${m.__backendId}')">Edit</button>
-            <button class="link-btn danger" type="button" onclick="deleteMember('${m.__backendId}')">Hapus</button>
-          </td>
+          <td><button class="link-btn" type="button" onclick="editRecord('${m.__backendId}','member')">Edit</button><button class="link-btn danger" type="button" onclick="requestDelete('${m.__backendId}','member')">Hapus</button></td>
         </tr>`).join("");
       $("member-empty").style.display = list.length ? "none" : "block";
     }
+    function renderAttendance(){
+      const grouped = new Map();
+      attendances().forEach(a => {
+        const isCombinedService = ["KU 1","KU 2"].includes(a.commission);
+        const key = isCombinedService ? `ku-gabungan-${a.attendance_date}` : `${a.__backendId}`;
+        if(!grouped.has(key)) grouped.set(key, {...a});
+        else {
+          const current = grouped.get(key);
+          current.attendance_count = Number(current.attendance_count || 0) + Number(a.attendance_count || 0);
+          current.commission = "KU 1 + KU 2";
+          current.visitor_name = "KU 1 + KU 2";
+          if(a.notes) current.notes = [current.notes, a.notes].filter(Boolean).join("; ");
+        }
+      });
+      const list = [...grouped.values()].sort((a,b) => String(b.attendance_date).localeCompare(String(a.attendance_date)));
+      $("attendance-list").innerHTML = list.length ? list.map(a => `
+        <div class="activity-row">
+          <strong>${escapeHtml(a.member_name)} · ${escapeHtml(a.commission)}</strong>
+          <small>${formatDate(a.attendance_date)} · ${escapeHtml(a.visitor_name || "Ibadah Komisi")} · ${a.attendance_count || 0} jemaat hadir${a.notes ? ` · Evaluasi: ${escapeHtml(a.notes)}` : ""}</small>
+          <button class="link-btn" type="button" onclick="editRecord('${a.__backendId}','attendance')">Edit</button><button class="link-btn danger" type="button" onclick="requestDelete('${a.__backendId}','kehadiran')">Hapus</button>
+        </div>`).join("") : `<p class="empty">Belum ada catatan kehadiran.</p>`;
+    }
+    function renderVisits(){
+      const list = [...visits()].sort((a,b) => String(b.visit_date).localeCompare(String(a.visit_date)));
+      $("visit-list").innerHTML = list.length ? list.map(v => `
+        <div class="activity-row">
+          <strong>${escapeHtml(v.member_name)} · ${escapeHtml(v.commission)}</strong>
+          <small>${formatDate(v.visit_date)} · ${escapeHtml(v.visit_status || "Sudah Dikunjungi")}</small>
+          <button class="link-btn" type="button" onclick="editRecord('${v.__backendId}','visit')">Edit</button><button class="link-btn danger" type="button" onclick="requestDelete('${v.__backendId}','kunjungan')">Hapus</button>
+        </div>`).join("") : `<p class="empty">Belum ada catatan kunjungan.</p>`;
+    }
+    function renderReports(){
+      const markup = commissions().map(c => `
+        <article class="card metric">
+          <p>${escapeHtml(c)}</p>
+          <strong>${members().filter(m => m.commission === c).length}</strong>
+          <p class="mt-2">${attendances().filter(a => a.commission === c && a.present).length} kehadiran · ${visits().filter(v => v.commission === c).length} kunjungan</p>
+        </article>`).join("");
+      $("report-cards").innerHTML = markup;
+      $("visits-report-cards").innerHTML = markup;
+    }
+    function renderUsers(){
+      const list = users();
+      $("user-list").innerHTML = list.map(u => {
+        let metadata = {};
+        try { metadata = JSON.parse(u.notes || "{}"); } catch(e){}
+        return `<div class="activity-row flex justify-between gap-3">
+          <div><strong>${escapeHtml(u.member_name)}</strong><small>${escapeHtml(metadata.username || "")} · ${escapeHtml(u.commission || "")} · ${escapeHtml(u.membership_status || "")}</small></div>
+          <button class="link-btn" type="button" onclick="editRecord('${u.__backendId}','user')">Edit</button><button class="link-btn danger" type="button" onclick="requestDelete('${u.__backendId}','pengguna')">Hapus</button>
+        </div>`;
+      }).join("");
+      $("user-empty").style.display = list.length ? "none" : "block";
+    }
+    function renderCommissionManager(){
+      const customRecords = records.filter(r => r.record_type === "commission");
+      const all = commissions();
+      $("commission-list").innerHTML = all.map(name => {
+        const matching = customRecords.find(r => r.commission === name);
+        const enabled = !matching || matching.membership_status !== "Nonaktif";
+        return `<div class="commission-row">
+          <span class="commission-name">${escapeHtml(name)}</span>
+          <span class="status">${enabled ? "Aktif" : "Nonaktif"}</span>
+          ${matching ? `<button class="link-btn" type="button" onclick="editRecord('${matching.__backendId}','commission')">Edit</button><button class="link-btn" type="button" onclick="toggleCommission('${matching.__backendId}')">${enabled ? "Nonaktifkan" : "Aktifkan"}</button><button class="link-btn danger" type="button" onclick="requestDelete('${matching.__backendId}','komisi')">Hapus</button>` : ""}
+        </div>`;
+      }).join("");
+      $("commission-empty").style.display = all.length ? "none" : "block";
+    }
+    function renderActivityLog(){
+      const list = [...activities()].sort((a,b) => String(b.join_date).localeCompare(String(a.join_date))).slice(0,20);
+      $("activity-log-list").innerHTML = list.map(a => `<div class="activity-row"><strong>${escapeHtml(a.member_name)}</strong><small>${escapeHtml(a.notes)} · ${a.join_date ? new Date(a.join_date).toLocaleString("id-ID") : ""}</small></div>`).join("");
+      $("activity-log-empty").style.display = list.length ? "none" : "block";
+    }
+    function renderAll(){
+      configRecords = {};
+      records.filter(r => r.record_type === "setting").forEach(r => configRecords[r.member_name] = r);
+      populateAllCommissionInputs();
+      applyChurchProfile();
+      applyAppearance();
+      renderDashboard();
+      renderMembers();
+      renderAttendance();
+      renderVisits();
+      renderReports();
+      renderUsers();
+      renderCommissionManager();
+      renderActivityLog();
+      fillSettingsForms();
+    }
+    function fillSettingsForms(){
+      const church = getSetting("church_profile",{});
+      ["short_name","full_name","vision","address","phone","email","extra"].forEach(k => {
+        const field = $("church-" + k.replace("_","-"));
+        if(field && document.activeElement !== field) field.value = church[k] || "";
+      });
 
-    // --- FUNGSI GENERATE QR CODE ---
-    window.showMemberQR = function(id) {
-      const m = records.find(r => r.__backendId === id);
-      if(!m) return;
-      $("qr-member-name").textContent = m.member_name;
-      $("qr-member-details").textContent = `${m.commission} · ${m.phone || "Tanpa Telp"}`;
-      
-      const container = $("qrcode-container");
-      container.innerHTML = ""; // Bersihkan QR sebelumnya
-      
-      // Data yang dimasukkan ke dalam QR Code
-      const qrData = JSON.stringify({ id: m.__backendId, name: m.member_name, commission: m.commission });
-      new QRCode(container, { text: qrData, width: 180, height: 180 });
-      
-      openModal("qr-modal");
-    };
+      const admin = getSetting("admin_profile",{});
+      ["name","username","email","phone","photo"].forEach(k => {
+        const field = $("admin-" + k);
+        if(field && document.activeElement !== field) field.value = admin[k] || "";
+      });
 
-    // --- FUNGSI SCANNER QR ABSENSI ---
-    function initQrScanner() {
-      if (html5QrCode) return;
-      html5QrCode = new Html5Qrcode("reader");
-      html5QrCode.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 220, height: 220 } },
-        async (decodedText) => {
-          try {
-            const data = JSON.parse(decodedText);
-            const service = $("qr-attendance-service").value;
-            
-            // Tampilkan hasil scan di layar
-            $("scan-result-box").innerHTML = `
-              <strong class="text-green-600 text-base">Berhasil Absen!</strong>
-              <span class="font-bold mt-1">${escapeHtml(data.name)}</span>
-              <span class="text-xs text-slate-500">${escapeHtml(data.commission)} · ${service}</span>
-            `;
+      const attendance = getSetting("attendance_settings",{});
+      if(document.activeElement !== $("attendance-type")) $("attendance-type").value = attendance.type || "";
+      if(document.activeElement !== $("attendance-period")) $("attendance-period").value = attendance.period || "Mingguan";
+      if(document.activeElement !== $("attendance-status-setting")) $("attendance-status-setting").value = attendance.statuses || "Hadir, Tidak Hadir, Izin, Sakit, Tanpa Keterangan";
+      if(document.activeElement !== $("attendance-note-setting")) $("attendance-note-setting").value = attendance.notes || "";
+      const attendanceCommissions = attendance.commissions || [];
+      [...$("attendance-commission-setting").options].forEach(o => o.selected = attendanceCommissions.includes(o.value));
 
-            // Simpan data absensi ke sistem & Google Sheets
-            const r = blankRecord("attendance");
-            r.member_name = data.name;
-            r.commission = service;
-            r.visitor_name = data.name;
-            r.attendance_count = 1;
-            r.present = true;
-            r.notes = "Absen via Scan QR Code";
-            
-            await window.dataSdk.create(r);
-            saveToSheetDB(r);
-            showToast();
+      const visit = getSetting("visit_settings",{});
+      ["category","status","form","notes","reminder"].forEach(k => {
+        const field = $("visit-" + (k === "form" ? "form-setting" : k === "status" ? "status-setting" : k === "notes" ? "notes-setting" : k));
+        if(field && document.activeElement !== field) field.value = visit[k] || (k === "reminder" ? "Aktif" : "");
+      });
 
-            // Beri jeda 3 detik agar scanner tidak langsung spam scan orang yang sama
-            html5QrCode.pause();
-            setTimeout(() => { if(html5QrCode) html5QrCode.resume(); }, 3500);
+      const n = getSetting("notifications",{});
+      ["member","visit","attendance","report","activity"].forEach(k => $("notify-" + k).checked = Boolean(n[k]));
 
-          } catch(e) {
-            $("scan-result-box").innerHTML = `<span class="text-red-500 font-bold">QR Code tidak valid!</span>`;
-          }
-        },
-        (errorMessage) => { /* Abaikan error scanning frame kosong */ }
-      ).catch(err => {
-        $("reader").innerHTML = `<p class="p-4 text-center text-xs text-red-400">Kamera tidak dapat diakses atau izin ditolak browser.</p>`;
+      const ap = getSetting("appearance",{});
+      ["primary","accent","mode","scale","sidebar","dashboard"].forEach(k => {
+        const field = $("appearance-" + k);
+        if(field && document.activeElement !== field && ap[k]) field.value = ap[k];
+      });
+
+      const sys = getSetting("system",{});
+      ["language","date","timezone","report","table","page-size"].forEach(k => {
+        const field = $("system-" + k);
+        if(field && document.activeElement !== field && sys[k]) field.value = sys[k];
       });
     }
-
-    function stopQrScanner() {
-      if (html5QrCode) {
-        html5QrCode.stop().then(() => { html5QrCode = null; }).catch(err => {});
-      }
-    }
-
     function setView(id){
       document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === id));
       document.querySelectorAll(".nav-link").forEach(b => b.classList.toggle("active", b.dataset.view === id));
       $("sidebar").classList.remove("open");
-      
-      if(id === "qr-attendance-view") {
-        setTimeout(initQrScanner, 300);
-      } else {
-        stopQrScanner();
-      }
     }
+    function setSettingsPanel(id){
+      document.querySelectorAll(".settings-panel").forEach(p => p.classList.toggle("active", p.id === id));
+      document.querySelectorAll(".settings-tab").forEach(b => b.classList.toggle("active", b.dataset.settingsPanel === id));
+    }
+    function downloadFile(content, type, filename){
+      const url = URL.createObjectURL(new Blob([content],{type}));
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    function exportCsv(format="csv"){
+      const headers = ["Jenis","Nama","Komisi","Telepon","Alamat","Status","Tanggal"];
+      const rows = records.filter(r => ["member","attendance","visit"].includes(r.record_type)).map(r => [
+        r.record_type, r.member_name, r.commission, r.phone, r.address, r.membership_status || r.visit_status || (r.present ? "Hadir" : "Tidak Hadir"), r.join_date || r.attendance_date || r.visit_date
+      ]);
+      const csv = "\ufeff" + [headers,...rows].map(row => row.map(x => `"${String(x || "").replace(/"/g,'""')}"`).join(",")).join("\n");
+      if(format === "csv") return downloadFile(csv,"text/csv","data-administrasi-gky.csv");
+      const title = "Laporan Administrasi GKY Singkawang";
+      const html = `<html><head><meta charset="utf-8"><title>${title}</title></head><body><h1>${title}</h1><pre>${escapeHtml(csv.replace(/^\ufeff/,""))}</pre></body></html>`;
+      if(format === "pdf") return downloadFile(html,"application/pdf","laporan-gky.pdf");
+      downloadFile(html,"application/msword","laporan-gky.doc");
+    }
+    function selectedExport(id){ return $(id)?.value || "csv"; }
+    function askConfirm(action, message){
+      pendingAction = action;
+      $("confirm-message").textContent = message;
+      openModal("confirm-modal");
+    }
+
+    window.editRecord = function(id, kind){
+      const record = records.find(r => r.__backendId === id);
+      if(!record) return;
+      editingRecord = record;
+      if(kind === "member"){
+        $("member-form").reset(); $("m-name").value=record.member_name||""; $("m-commission").value=record.commission||""; $("m-phone").value=record.phone||""; $("m-status").value=record.membership_status||"Aktif"; $("m-address").value=record.address||""; $("m-notes").value=record.notes||""; populateCommissionSelect("m-commission"); $("m-commission").value=record.commission||""; openModal("member-modal");
+      } else if(kind === "attendance"){
+        $("attendance-form").reset(); $("a-service").value=record.commission||"KU 1"; $("a-count").value=record.attendance_count||0; $("a-date").value=record.attendance_date||today(); $("a-evaluation").value=record.notes||""; openModal("attendance-modal");
+      } else if(kind === "visit"){
+        $("visit-form").reset(); $("v-member").value=record.member_name||""; populateCommissionSelect("v-commission"); $("v-commission").value=record.commission||""; $("v-date").value=record.visit_date||today(); $("v-status").value=record.visit_status||"Sudah Dikunjungi"; $("v-notes").value=record.visit_notes||""; openModal("visit-modal");
+      } else if(kind === "user"){
+        let metadata={}; try{metadata=JSON.parse(record.notes||"{}")}catch(e){} $("user-form").reset(); $("u-name").value=record.member_name||""; $("u-username").value=metadata.username||""; $("u-email").value=metadata.email||""; $("u-phone").value=record.phone||""; $("u-role").value=record.commission||"Admin"; $("u-status").value=record.membership_status||"Aktif"; openModal("user-modal");
+      } else if(kind === "commission"){
+        $("new-commission-name").value=record.commission||""; openModal("commission-modal");
+      }
+    };
+    window.requestDelete = function(id, kind){
+      askConfirm(async () => {
+        const record = records.find(r => r.__backendId === id);
+        if(record){
+          const result = await window.dataSdk.delete(record);
+          if(result.isOk){ showToast(); await logActivity("Menghapus data", kind); }
+        }
+      }, `Anda akan menghapus ${kind}.`);
+    };
+    window.toggleCommission = async function(id){
+      const record = records.find(r => r.__backendId === id);
+      if(!record) return;
+      const updated = {...record, membership_status: record.membership_status === "Nonaktif" ? "Aktif" : "Nonaktif"};
+      const result = await window.dataSdk.update(updated);
+      if(result.isOk){ showToast(); await logActivity("Perubahan komisi", updated.commission); }
+    };
 
     document.addEventListener("DOMContentLoaded", async () => {
       lucide.createIcons();
 
+      // --- LOGIC LOGIN & REGISTER ---
       $("login-form").onsubmit = (e) => {
         e.preventDefault();
         const u = $("login-user").value.trim();
         const p = $("login-pass").value.trim();
-        if(u === "admin" && p === "admin") {
-          $("welcome").style.display = "none"; $("dashboard").classList.add("active");
+        // Cek apakah ada user terdaftar di local storage atau default admin
+        const registeredUsers = JSON.parse(localStorage.getItem("gky_users") || "[]");
+        const found = registeredUsers.find(x => x.username === u && x.password === p);
+
+        if(u === "admin" && p === "admin" || found) {
+          $("welcome").style.display = "none"; 
+          $("dashboard").classList.add("active");
         } else {
-          $("login-error").textContent = "Gunakan admin / admin"; $("login-error").classList.remove("hidden");
+          const err = $("login-error");
+          err.textContent = "Username atau password salah! (Coba admin / admin atau buat akun baru)";
+          err.classList.remove("hidden");
         }
+      };
+
+      $("register-form").onsubmit = (e) => {
+        e.preventDefault();
+        const name = $("reg-name").value.trim();
+        const username = $("reg-user").value.trim();
+        const password = $("reg-pass").value.trim();
+
+        let registeredUsers = JSON.parse(localStorage.getItem("gky_users") || "[]");
+        if(registeredUsers.some(x => x.username === username)) {
+          alert("Username sudah terdaftar, gunakan yang lain.");
+          return;
+        }
+
+        registeredUsers.push({name, username, password});
+        localStorage.setItem("gky_users", JSON.stringify(registeredUsers));
+
+        const successMsg = $("reg-success");
+        successMsg.textContent = "Akun berhasil dibuat! Silakan pindah ke tab Login.";
+        successMsg.classList.remove("hidden");
+        $("register-form").reset();
       };
 
       $("mobile-menu").onclick = () => $("sidebar").classList.toggle("open");
       document.querySelectorAll(".nav-link").forEach(btn => btn.onclick = () => setView(btn.dataset.view));
+      document.querySelectorAll(".settings-tab").forEach(btn => btn.onclick = () => setSettingsPanel(btn.dataset.settingsPanel));
       document.querySelectorAll("[data-close]").forEach(btn => btn.onclick = () => closeModal(btn.dataset.close));
       $("back-to-dashboard").onclick = () => setView("dashboard-view");
 
       $("top-add-member").onclick = () => { $("member-form").reset(); populateCommissionSelect("m-commission"); openModal("member-modal"); };
       $("member-add").onclick = $("top-add-member").onclick;
+      $("attendance-add").onclick = () => { $("attendance-form").reset(); $("a-date").value = today(); const service = $("a-service"); service.innerHTML = ATTENDANCE_TYPES.map(type => `<option value="${escapeHtml(type)}">${escapeHtml(type)}</option>`).join(""); openModal("attendance-modal"); };
+      $("visit-add").onclick = () => { $("visit-form").reset(); $("v-date").value = today(); populateCommissionSelect("v-commission"); openModal("visit-modal"); };
+      $("open-user-modal").onclick = () => { $("user-form").reset(); openModal("user-modal"); };
+      $("open-commission-modal").onclick = () => { $("commission-form").reset(); openModal("commission-modal"); };
+
       $("member-search").oninput = renderMembers;
       $("member-commission-filter").onchange = renderMembers;
 
+      // 1. FORM ANGGOTA BARU DIPERBARUI
       $("member-form").onsubmit = async e => {
         e.preventDefault();
-        const r = blankRecord("member");
-        Object.assign(r, {
-          member_name: $("m-name").value.trim(),
-          commission: $("m-commission").value,
-          phone: $("m-phone").value.trim(),
-          address: $("m-address").value.trim(),
-          membership_status: $("m-status").value
-        });
-        const res = editingRecord ? await window.dataSdk.update({...editingRecord, ...r}) : await window.dataSdk.create(r);
-        if(res.isOk){
-          if(!editingRecord) saveToSheetDB(r);
-          closeModal("member-modal"); showToast(); editingRecord = null;
+        const btn = $("member-save"); btn.disabled = true;
+        try {
+          const r = blankRecord("member");
+          Object.assign(r,{member_name:$("m-name").value.trim(),commission:$("m-commission").value,phone:$("m-phone").value.trim(),address:$("m-address").value.trim(),membership_status:$("m-status").value,notes:$("m-notes").value.trim(),join_date:today()});
+          
+          const dataBersih = JSON.parse(JSON.stringify(r));
+
+          const result = editingRecord && editingRecord.record_type === "member" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
+          
+          if(result.isOk){ 
+            if(!editingRecord) setTimeout(() => saveToSheetDB(dataBersih), 500); 
+            closeModal("member-modal"); showToast(); await logActivity("Menambahkan anggota",r.member_name); 
+          }
+        } catch(err) {
+          alert("Error simpan anggota: " + err.message);
+        } finally {
+          editingRecord = null; btn.disabled = false;
         }
       };
 
-      window.editMember = function(id) {
-        const m = records.find(r => r.__backendId === id);
-        if(!m) return;
-        editingRecord = m;
-        $("m-name").value = m.member_name;
-        populateCommissionSelect("m-commission");
-        $("m-commission").value = m.commission;
-        $("m-phone").value = m.phone;
-        $("m-status").value = m.membership_status;
-        $("m-address").value = m.address;
-        openModal("member-modal");
-      };
+      // 2. FORM KEHADIRAN DIPERBARUI
+      $("attendance-form").onsubmit = async e => {
+        e.preventDefault();
+        const btn = $("attendance-save"); btn.disabled = true;
+        try {
+          const r = blankRecord("attendance");
+          Object.assign(r,{member_name:"Kehadiran keseluruhan",commission:$("a-service").value,visitor_name:$("a-service").value,attendance_date:$("a-date").value,attendance_count:Number($("a-count").value),present:true,notes:$("a-evaluation").value.trim()});
+          
+          const dataBersih = JSON.parse(JSON.stringify(r));
 
-      window.deleteMember = function(id) {
-        const m = records.find(r => r.__backendId === id);
-        if(m && confirm("Hapus anggota ini?")) {
-          window.dataSdk.delete(m); showToast();
+          const result = editingRecord && editingRecord.record_type === "attendance" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
+          
+          if(result.isOk){ 
+            if(!editingRecord) setTimeout(() => saveToSheetDB(dataBersih), 500); 
+            closeModal("attendance-modal"); showToast(); await logActivity("Mencatat kehadiran",r.member_name); 
+          }
+        } catch(err) {
+          alert("Error simpan kehadiran: " + err.message);
+        } finally {
+          editingRecord = null; btn.disabled = false;
         }
       };
 
-      await window.dataSdk.init({
+      // 3. FORM KUNJUNGAN DIPERBARUI
+      $("visit-form").onsubmit = async e => {
+        e.preventDefault();
+        const btn = $("visit-save"); btn.disabled = true;
+        try {
+          const r = blankRecord("visit");
+          Object.assign(r,{member_name:$("v-member").value.trim(),commission:$("v-commission").value,visit_date:$("v-date").value,visit_status:$("v-status").value,visit_notes:$("v-notes").value.trim()});
+          
+          const dataBersih = JSON.parse(JSON.stringify(r));
+
+          const result = editingRecord && editingRecord.record_type === "visit" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
+          
+          if(result.isOk){ 
+            if(!editingRecord) setTimeout(() => saveToSheetDB(dataBersih), 500); 
+            closeModal("visit-modal"); showToast(); await logActivity("Menambahkan kunjungan",r.member_name); 
+          }
+        } catch(err) {
+          alert("Error simpan kunjungan: " + err.message);
+        } finally {
+          editingRecord = null; btn.disabled = false;
+        }
+      };
+
+      $("church-form").onsubmit = async e => {
+        e.preventDefault();
+        await saveSetting("church_profile",{
+          short_name:$("church-short-name").value.trim(),full_name:$("church-full-name").value.trim(),
+          vision:$("church-vision").value.trim(),address:$("church-address").value.trim(),
+          phone:$("church-phone").value.trim(),email:$("church-email").value.trim(),extra:$("church-extra").value.trim()
+        },$("church-save"));
+      };
+      $("admin-form").onsubmit = async e => {
+        e.preventDefault();
+        await saveSetting("admin_profile",{name:$("admin-name").value.trim(),username:$("admin-username").value.trim(),email:$("admin-email").value.trim(),phone:$("admin-phone").value.trim(),photo:$("admin-photo").value.trim()},$("admin-save"));
+      };
+      $("admin-password-info").onclick = () => showToast();
+
+      $("user-form").onsubmit = async e => {
+        e.preventDefault();
+        const btn = $("user-save"); btn.disabled = true;
+        const r = blankRecord("user");
+        r.member_name = $("u-name").value.trim();
+        r.commission = $("u-role").value;
+        r.phone = $("u-phone").value.trim();
+        r.membership_status = $("u-status").value;
+        r.notes = JSON.stringify({username:$("u-username").value.trim(),email:$("u-email").value.trim(),permissions:[...document.querySelectorAll(".u-permission:checked")].map(x => x.value)});
+        const result = editingRecord && editingRecord.record_type === "user" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
+        editingRecord = null; btn.disabled = false;
+        if(result.isOk){ closeModal("user-modal"); showToast(); await logActivity("Menambahkan pengguna",r.member_name); }
+      };
+
+      $("commission-form").onsubmit = async e => {
+        e.preventDefault();
+        const name = $("new-commission-name").value.trim();
+        if(!name || commissions().includes(name)) return;
+        const btn = $("commission-save"); btn.disabled = true;
+        const r = blankRecord("commission");
+        r.commission = name; r.membership_status = "Aktif";
+        const result = editingRecord && editingRecord.record_type === "commission" ? await window.dataSdk.update({...editingRecord,...r}) : await window.dataSdk.create(r);
+        editingRecord = null; btn.disabled = false;
+        if(result.isOk){ closeModal("commission-modal"); showToast(); await logActivity("Menambahkan komisi",name); }
+      };
+
+      $("attendance-settings-form").onsubmit = async e => {
+        e.preventDefault();
+        await saveSetting("attendance_settings",{type:$("attendance-type").value,period:$("attendance-period").value,commissions:[...$("attendance-commission-setting").selectedOptions].map(o=>o.value),statuses:$("attendance-status-setting").value,notes:$("attendance-note-setting").value},$("attendance-settings-save"));
+      };
+      $("visits-settings-form").onsubmit = async e => {
+        e.preventDefault();
+        await saveSetting("visit_settings",{category:$("visit-category").value,status:$("visit-status-setting").value,form:$("visit-form-setting").value,notes:$("visit-notes-setting").value,reminder:$("visit-reminder").value},$("visits-settings-save"));
+      };
+      $("notifications-form").onsubmit = async e => {
+        e.preventDefault();
+        await saveSetting("notifications",{member:$("notify-member").checked,visit:$("notify-visit").checked,attendance:$("notify-attendance").checked,report:$("notify-report").checked,activity:$("notify-activity").checked},$("notifications-save"));
+      };
+      $("appearance-form").onsubmit = async e => {
+        e.preventDefault();
+        await saveSetting("appearance",{primary:$("appearance-primary").value,accent:$("appearance-accent").value,mode:$("appearance-mode").value,scale:$("appearance-scale").value,sidebar:$("appearance-sidebar").value,dashboard:$("appearance-dashboard").value},$("appearance-save"));
+      };
+      $("appearance-reset").onclick = () => {
+        $("appearance-primary").value="#092f55"; $("appearance-accent").value="#d5ad57"; $("appearance-mode").value="light"; $("appearance-scale").value="normal"; $("appearance-sidebar").value="expanded"; $("appearance-dashboard").value="summary";
+      };
+      $("system-form").onsubmit = async e => {
+        e.preventDefault();
+        await saveSetting("system",{language:$("system-language").value,date:$("system-date").value,timezone:$("system-timezone").value,report:$("system-report").value,table:$("system-table").value,"page-size":$("system-page-size").value},$("system-save"));
+      };
+
+      $("security-save").onclick = async () => await saveSetting("security",{session:$("session-duration").value},$("security-save"));
+      $("logout-all-devices").onclick = () => askConfirm(async () => { await saveSetting("security",{session:$("session-duration").value,logout_requested:true}); }, "Keluar dari semua perangkat yang terhubung.");
+      
+      $("backup-data").onclick = async () => {
+        const btn = $("backup-data");
+        btn.disabled = true;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<i data-lucide="archive"></i><span class="canva-text" style="color: rgb(21, 59, 91); font-weight: 700; font-style: normal; font-size: 15px;">Proses Backup...</span>`;
+        lucide.createIcons();
+        try {
+          const dataToBackup = records.filter(r => ["member","attendance","visit"].includes(r.record_type));
+          await fetch("https://sheetdb.io/api/v1/zbulood5cnxxx", {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: dataToBackup })
+          });
+          showToast(); 
+        } catch (error) {
+          alert("Gagal melakukan backup ke Google Sheets. Periksa koneksi internet.");
+        }
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+        lucide.createIcons(); 
+      };
+
+      $("export-data").onclick = exportCsv;
+      $("download-report").onclick = exportCsv;
+      $("download-visits-report").onclick = () => exportCsv(selectedExport("visits-export-format"));
+      $("restore-data").onclick = () => askConfirm(async () => { showToast(); }, "Restore data memerlukan verifikasi administrator melalui pengelolaan data Canva.");
+      $("export-report").onclick = () => exportCsv(selectedExport("report-export-format"));
+      $("privacy-info").onclick = () => showToast();
+      $("terms-info").onclick = () => showToast();
+
+      $("confirm-action").onclick = async () => {
+        const btn = $("confirm-action");
+        btn.disabled = true;
+        if(pendingAction) await pendingAction();
+        btn.disabled = false;
+        closeModal("confirm-modal");
+        pendingAction = null;
+      };
+
+      const init = await window.dataSdk.init({
         onDataChanged(data){
           records = data;
-          renderMembers();
-          populateCommissionSelect("member-commission-filter", true);
+          renderAll();
         }
       });
+      if(!init.isOk){
+        $("member-feedback").textContent = "Data administrasi belum dapat dimuat.";
+        $("member-feedback").className = "feedback show error";
+      }
     });
   </script>
+ 
 </body></html>
