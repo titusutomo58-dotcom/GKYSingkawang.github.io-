@@ -68,10 +68,8 @@
     }
     .nav-link:hover,.nav-link.active{color:#fff;background:#ffffff15;box-shadow:inset 3px 0 var(--gold)}
     .main-area{width:100%;margin-left:265px;padding:24px;transition:margin .3s ease}
-    .topbar{display:flex;justify-space-between;gap:15px;align-items:flex-start;margin-bottom:20px}
-    .eyebrow{font-size:11px;font-weight:700;letter-spacing:.13em;color:#b88631;text-transform:uppercase;margin:0 0 4px}
+    .topbar{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:20px}
     .page-title{margin:0;font-family:"Fraunces",serif;font-size:26px}
-    .copy{color:#667681;font-size:13px;margin:4px 0 0}
     .view{display:none}
     .view.active{display:block}
     .panel,.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px #122b3c0c}
@@ -112,7 +110,6 @@
     .toast{position:fixed;right:16px;bottom:16px;z-index:90;display:none;align-items:center;gap:9px;padding:12px 16px;background:#173f35;color:#fff;border-radius:10px;box-shadow:0 14px 30px #001b1533;font-size:13px;font-weight:700}
     .toast.show{display:flex;animation:toastIn .25s ease}
 
-    @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
     @keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
     @media(max-width:1024px){
@@ -124,9 +121,6 @@
       .sidebar.open{transform:translateX(0)}
       .main-area{margin-left:0;padding:16px}
       .mobile{display:inline-flex}
-      .topbar{flex-direction:column;align-items:stretch;gap:12px}
-      .topbar > div:first-child{align-items:center}
-      #top-add-member{width:100%!important}
     }
     @media(max-width:540px){
       .grid4{grid-template-columns:1fr}
@@ -209,12 +203,9 @@
       <div class="flex gap-3 items-center">
        <button id="mobile-menu" class="mobile secondary" type="button" aria-label="Buka menu"><i data-lucide="menu" class="w-5 h-5"></i></button>
        <div>
-        <p class="canva-text eyebrow" style="color: rgb(184, 134, 49); font-weight: 700;">Administrasi Gereja</p>
-        <h1 class="canva-text page-title">Dashboard Utama</h1>
-        <p id="dashboard-church-summary" class="canva-text copy">Pantau data jemaat, kehadiran, dan pelayanan pastoral.</p>
+        <h1 id="page-heading-title" class="canva-text page-title">Dashboard</h1>
        </div>
       </div>
-      <button id="top-add-member" onclick="openAddMemberModal()" class="canva-button primary" type="button" style="background: rgb(213, 173, 87); color: rgb(9, 47, 85); font-weight: 700; width: auto;"><i data-lucide="user-plus" class="w-4 h-4"></i><span>Tambah Anggota</span></button>
      </header>
 
      <!-- Dashboard View -->
@@ -263,7 +254,7 @@
            <th>Telepon</th>
            <th>Alamat</th>
            <th>Status</th>
-           <th>Aksi / QR</th>
+           <th>Aksi</th>
           </tr>
          </thead>
          <tbody id="member-body"></tbody>
@@ -409,7 +400,6 @@
      <section id="settings-view" class="view">
       <div class="settings-head flex justify-between items-center mb-4">
        <div>
-        <p class="canva-text eyebrow" style="color: rgb(184, 134, 49); font-weight: 700;">Administrasi Sistem</p>
         <h2 class="page-title" style="font-size: 22px;">Pengaturan</h2>
        </div>
        <button id="back-to-dashboard" class="canva-button secondary" type="button" style="background: rgb(255, 255, 255); color: rgb(21, 59, 91); font-weight: 600; width: auto;"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Kembali</span></button>
@@ -501,7 +491,6 @@
       <h3 id="qr-member-name" class="font-bold text-base mt-3 text-slate-800"></h3>
       <p id="qr-member-details" class="text-xs text-slate-500 mt-1"></p>
       
-      <!-- Tombol Download Gambar QR -->
       <a id="download-qr-btn" class="primary mt-4 py-2 px-4 text-xs font-bold inline-flex items-center justify-center gap-2" style="width: auto; text-decoration: none;" download="qrcode-jemaat.png">
         <i data-lucide="download" class="w-4 h-4"></i> Download Gambar QR
       </a>
@@ -526,11 +515,8 @@
      <div class="form-grid">
       <div class="form-group"><label>Nama Lengkap</label><input id="m-name" class="field" required placeholder="Masukkan nama lengkap"></div>
       <div class="form-group"><label>Komisi</label><select id="m-commission" class="field" required></select></div>
-      
-      <!-- Penambahan Field Tempat & Tanggal Lahir -->
       <div class="form-group"><label>Tempat Lahir</label><input id="m-pob" class="field" placeholder="Contoh: Singkawang"></div>
       <div class="form-group"><label>Tanggal Lahir</label><input id="m-dob" class="field" type="date"></div>
-
       <div class="form-group"><label>Nomor Telepon</label><input id="m-phone" class="field" type="tel" placeholder="08xxxxxxxxxx"></div>
       <div class="form-group"><label>Status Keanggotaan</label><select id="m-status" class="field"><option value="Aktif">Aktif</option><option value="Tidak Aktif">Tidak Aktif</option></select></div>
       <div class="form-group full"><label>Alamat</label><textarea id="m-address" class="field textarea" placeholder="Alamat rumah jemaat"></textarea></div>
@@ -553,7 +539,6 @@
     let records = [];
     let editingRecord = null;
     let editingVisitRecord = null;
-    let html5QrCode = null;
 
     if (typeof window.dataSdk === 'undefined') {
       window.dataSdk = {
@@ -645,6 +630,61 @@
       if(!select) return;
       select.innerHTML = (includeAll ? "<option value=''>Semua komisi</option>" : "<option value=''>Pilih komisi</option>") +
         commissions().map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+    }
+
+    /* Member Management Functions */
+    function openAddMemberModal() {
+      editingRecord = null;
+      $("modal-member-title").textContent = "Tambah Anggota Jemaat";
+      $("member-form").reset();
+      populateCommissionSelect("m-commission");
+      openModal("member-modal");
+    }
+
+    function openEditMemberModal(backendId) {
+      const member = records.find(r => r.__backendId === backendId);
+      if (!member) return;
+
+      editingRecord = member;
+      $("modal-member-title").textContent = "Edit Data Anggota Jemaat";
+      populateCommissionSelect("m-commission");
+
+      $("m-name").value = member.member_name || "";
+      $("m-commission").value = member.commission || "Anggota Jemaat";
+      $("m-pob").value = member.pob || "";
+      $("m-dob").value = member.dob || "";
+      $("m-phone").value = member.phone || "";
+      $("m-status").value = member.membership_status || "Aktif";
+      $("m-address").value = member.address || "";
+
+      openModal("member-modal");
+    }
+
+    async function handleSaveMember(e) {
+      e.preventDefault();
+      const payload = {
+        record_type: "member",
+        member_name: $("m-name").value,
+        commission: $("m-commission").value,
+        pob: $("m-pob").value,
+        dob: $("m-dob").value,
+        phone: $("m-phone").value,
+        membership_status: $("m-status").value,
+        address: $("m-address").value
+      };
+
+      if(editingRecord) {
+        payload.__backendId = editingRecord.__backendId;
+        await window.dataSdk.update(payload);
+        saveToSheetDB(payload, true);
+      } else {
+        await window.dataSdk.create(payload);
+        saveToSheetDB(payload, false);
+      }
+
+      closeModal("member-modal");
+      showToast();
+      renderAll();
     }
 
     /* Modal & Handler Kunjungan */
@@ -820,6 +860,7 @@
           <td>${escapeHtml(m.address || "-")}</td>
           <td><span class="status">${escapeHtml(m.membership_status || "Aktif")}</span></td>
           <td>
+            <button onclick="openEditMemberModal('${m.__backendId}')" class="link-btn">Edit</button>
             <button onclick="showQRCode('${escapeHtml(m.member_name)}', '${escapeHtml(m.commission)}')" class="link-btn">QR Code</button>
           </td>
         </tr>
@@ -831,41 +872,6 @@
       renderMembers();
       renderVisits();
       if(window.lucide) lucide.createIcons();
-    }
-
-    function openAddMemberModal() {
-      editingRecord = null;
-      $("modal-member-title").textContent = "Tambah Anggota Jemaat";
-      $("member-form").reset();
-      populateCommissionSelect("m-commission");
-      openModal("member-modal");
-    }
-
-    async function handleSaveMember(e) {
-      e.preventDefault();
-      const payload = {
-        record_type: "member",
-        member_name: $("m-name").value,
-        commission: $("m-commission").value,
-        pob: $("m-pob").value,
-        dob: $("m-dob").value,
-        phone: $("m-phone").value,
-        membership_status: $("m-status").value,
-        address: $("m-address").value
-      };
-
-      if(editingRecord) {
-        payload.__backendId = editingRecord.__backendId;
-        await window.dataSdk.update(payload);
-        saveToSheetDB(payload, true);
-      } else {
-        await window.dataSdk.create(payload);
-        saveToSheetDB(payload, false);
-      }
-
-      closeModal("member-modal");
-      showToast();
-      renderAll();
     }
 
     function showQRCode(name, commission) {
@@ -905,6 +911,10 @@
           btn.classList.add("active");
           const viewId = btn.getAttribute("data-view");
           if($(viewId)) $(viewId).classList.add("active");
+
+          // Update header title dynamically
+          const titleText = btn.querySelector("span").textContent;
+          if($("page-heading-title")) $("page-heading-title").textContent = titleText;
         });
       });
 
