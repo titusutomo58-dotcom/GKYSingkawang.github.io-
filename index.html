@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="id">
 <head>
+  <script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260909-05-334ae15","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFLd8sKbwc,2","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Libre Baskerville":"YACgEUFdPdA,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YADLjI9qxTA,0","Nunito":"YACgEX8C5Gg,0","Oleo Script":"YACgEQQ14jI,0","Phantom Sans":"YAHO2E8Pb88,0","Playfair Display":"YACgEYmuCJE,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YADWjpfPmdk,0","Raleway":"YACgEVg3xZg,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Ubuntu":"YACgERDU--Q,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YADlN8CFZ8Q,0","ui-sans-serif":"YACkoN-xg4g,0"}}');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Administrasi GKY Singkawang</title>
@@ -84,11 +85,16 @@
     .form-group label{font-size:12px;font-weight:700;color:#42535f;text-align:left}
     .full{grid-column:1/-1}
     .textarea{min-height:80px;resize:vertical}
+    
     .table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:5px}
     .data-table{width:100%;min-width:750px;border-collapse:collapse}
     .data-table th{text-align:left;padding:10px 12px;background:#f7f9fa;text-transform:uppercase;letter-spacing:.05em;font-size:11px;color:#697883}
     .data-table td{padding:11px 12px;border-top:1px solid #edf1f3;font-size:13px;color:#344652}
+    .status{font-size:11px;padding:3px 7px;border-radius:999px;background:#edf3f7;color:#31546c;display:inline-block}
+    .link-btn{border:0;background:transparent;padding:4px 6px;color:#174d78;font-weight:700;font-size:12px}
+    .link-btn.danger{color:#a53535}
     .mobile{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px}
+
     .modal-layer{display:none;position:fixed;z-index:70;inset:0;background:#03172b99;padding:16px;align-items:center;justify-content:center}
     .modal-layer.show{display:flex}
     .modal{width:min(100%,540px);max-height:90vh;overflow-y:auto;background:#fff;border-radius:16px;padding:20px}
@@ -96,10 +102,31 @@
     .close{border:0;background:#edf2f5;border-radius:50%;width:32px;height:32px;display:grid;place-items:center}
     .toast{position:fixed;right:16px;bottom:16px;z-index:90;display:none;align-items:center;gap:9px;padding:12px 16px;background:#173f35;color:#fff;border-radius:10px;box-shadow:0 14px 30px #001b1533;font-size:13px;font-weight:700}
     .toast.show{display:flex;animation:toastIn .25s ease}
+
     @keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+    @media(max-width:1024px){
+      .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .content-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:820px){
+      .sidebar{transform:translateX(-100%);box-shadow:5px 0 25px rgba(0,0,0,0.3)}
+      .sidebar.open{transform:translateX(0)}
+      .main-area{margin-left:0;padding:16px}
+      .mobile{display:inline-flex}
+    }
+    @media(max-width:540px){
+      .grid4{grid-template-columns:1fr}
+      .form-grid{grid-template-columns:1fr}
+      .toolbar{flex-direction:column;align-items:stretch}
+      .search{max-width:100%!important}
+      #member-commission-filter{max-width:100%!important}
+      .page-title{font-size:22px}
+      .modal{padding:16px}
+    }
   </style>
 </head>
-<body>
+<body style="background: rgb(244, 246, 248);">
   <div class="app-shell">
    <section id="welcome" class="welcome">
     <div class="welcome-inner">
@@ -108,7 +135,12 @@
      <h1 class="canva-text serif mt-1" style="color: rgb(255, 255, 255); font-weight: 700; font-size: 22px;">GKY Singkawang</h1>
      
      <div id="auth-container" class="mt-4 text-left">
-        <form id="login-form" class="space-y-3" onsubmit="handleLogin(event)">
+       <div class="flex gap-2 mb-3">
+         <button type="button" id="tab-login-btn" onclick="switchAuthTab('login')" class="flex-1 py-1.5 text-xs font-bold rounded bg-amber-500 text-slate-900 transition">Login</button>
+         <button type="button" id="tab-register-btn" onclick="switchAuthTab('register')" class="flex-1 py-1.5 text-xs font-bold rounded bg-slate-700 text-white transition">Buat Akun</button>
+       </div>
+
+       <form id="login-form" class="space-y-3" onsubmit="handleLogin(event)">
          <div class="form-group">
            <label style="color:#e2e8f0; font-size:11px;">Username / Email</label>
            <input type="text" id="login-user" class="field" style="padding:9px; font-size:13px;" required placeholder="Masukkan username">
@@ -118,7 +150,23 @@
            <input type="password" id="login-pass" class="field" style="padding:9px; font-size:13px;" required placeholder="••••••••">
          </div>
          <button type="submit" class="primary mt-1" style="padding:10px; font-size:13px;">MASUK SISTEM</button>
-        </form>
+       </form>
+
+       <form id="register-form" class="space-y-3 hidden" onsubmit="handleRegister(event)">
+         <div class="form-group">
+           <label style="color:#e2e8f0; font-size:11px;">Nama Lengkap</label>
+           <input type="text" id="reg-name" class="field" style="padding:9px; font-size:13px;" required placeholder="Nama lengkap">
+         </div>
+         <div class="form-group">
+           <label style="color:#e2e8f0; font-size:11px;">Username</label>
+           <input type="text" id="reg-user" class="field" style="padding:9px; font-size:13px;" required placeholder="Buat username">
+         </div>
+         <div class="form-group">
+           <label style="color:#e2e8f0; font-size:11px;">Password</label>
+           <input type="password" id="reg-pass" class="field" style="padding:9px; font-size:13px;" required placeholder="Buat password">
+         </div>
+         <button type="submit" class="primary mt-1" style="padding:10px; font-size:13px;">DAFTARKAN AKUN</button>
+       </form>
      </div>
      <div class="gold-rule"></div>
      <p class="canva-text serif italic" style="color: rgb(255, 255, 255); font-weight: 400; font-size: 12px;">“Menjadi Gereja yang Mulia dan Misioner”</p>
@@ -133,7 +181,11 @@
      <nav class="mt-4 space-y-1" aria-label="Navigasi utama">
       <button class="nav-link active" data-view="dashboard-view" type="button"><i data-lucide="layout-dashboard" class="w-4 h-4"></i><span>Dashboard</span></button> 
       <button class="nav-link" data-view="members-view" type="button"><i data-lucide="users" class="w-4 h-4"></i><span>Anggota Jemaat</span></button> 
+      <button class="nav-link" data-view="qr-attendance-view" type="button"><i data-lucide="qr-code" class="w-4 h-4"></i><span>Absensi Scan QR</span></button> 
+      <button class="nav-link" data-view="attendance-view" type="button"><i data-lucide="calendar-check" class="w-4 h-4"></i><span>Kehadiran</span></button> 
       <button class="nav-link" data-view="visits-view" type="button"><i data-lucide="clipboard-list" class="w-4 h-4"></i><span>Kunjungan Jemaat</span></button> 
+      <button class="nav-link" data-view="reports-view" type="button"><i data-lucide="bar-chart-3" class="w-4 h-4"></i><span>Laporan</span></button> 
+      <button class="nav-link" data-view="settings-view" type="button"><i data-lucide="settings" class="w-4 h-4"></i><span>Pengaturan</span></button>
       <button class="nav-link text-red-300 hover:text-red-100" onclick="handleLogout()" type="button"><i data-lucide="log-out" class="w-4 h-4"></i><span>Keluar</span></button>
      </nav>
     </aside>
@@ -142,7 +194,9 @@
      <header class="topbar">
       <div class="flex gap-3 items-center">
        <button id="mobile-menu" class="mobile secondary" type="button" onclick="toggleSidebar()"><i data-lucide="menu" class="w-5 h-5"></i></button>
-       <div><h1 id="page-heading-title" class="canva-text page-title">Dashboard</h1></div>
+       <div>
+        <h1 id="page-heading-title" class="canva-text page-title">Dashboard</h1>
+       </div>
       </div>
      </header>
 
@@ -150,7 +204,21 @@
      <section id="dashboard-view" class="view active">
       <div class="grid4">
        <article class="card metric"><p>Anggota Terdata</p><strong id="metric-members">0</strong></article>
+       <article class="card metric"><p>Komisi Aktif</p><strong id="metric-commissions">0</strong></article>
+       <article class="card metric"><p>Kehadiran Tercatat</p><strong id="metric-attendance">0</strong></article>
        <article class="card metric"><p>Kunjungan Tercatat</p><strong id="metric-visits">0</strong></article>
+      </div>
+      <div class="content-grid">
+       <section class="panel">
+        <h2 class="panel-title">Ringkasan Komisi</h2>
+        <p class="panel-sub">Jumlah anggota berdasarkan komisi pelayanan aktif.</p>
+        <div id="commission-cards" class="grid4 mt-4"></div>
+       </section>
+       <aside class="panel">
+        <h2 class="panel-title">Aktivitas Terbaru</h2>
+        <p class="panel-sub">Riwayat aktivitas penggunaan sistem.</p>
+        <div id="dashboard-activities" class="space-y-2 mt-3 text-xs"></div>
+       </aside>
       </div>
      </section>
 
@@ -160,24 +228,89 @@
        <div class="flex justify-between gap-3 flex-wrap items-center">
         <div>
          <h2 class="panel-title">Database Anggota Jemaat</h2>
-         <p class="panel-sub">Terhubung dengan Google Sheets (SheetDB).</p>
+         <p class="panel-sub">Kelola data seluruh anggota dan komisi pelayanan.</p>
         </div>
         <button id="member-add" onclick="openAddMemberModal()" class="primary" type="button" style="width: auto;"><i data-lucide="plus" class="w-4 h-4"></i><span>Tambah Anggota</span></button>
        </div>
-       <div class="table-wrap mt-4">
+       <div class="toolbar">
+        <input id="member-search" class="field search" type="search" placeholder="Cari nama anggota..." oninput="renderMembers()"> 
+        <select id="member-commission-filter" class="field" style="max-width:240px" onchange="renderMembers()"></select>
+       </div>
+       <div class="table-wrap">
         <table class="data-table">
          <thead>
           <tr>
            <th>Nama</th>
            <th>Komisi</th>
+           <th>Tempat, Tgl Lahir</th>
            <th>Telepon</th>
            <th>Alamat</th>
+           <th>Status</th>
            <th>Aksi</th>
           </tr>
          </thead>
          <tbody id="member-body"></tbody>
         </table>
        </div>
+       <p id="member-empty" class="empty hidden">Belum ada data anggota. Tambahkan anggota untuk memulai administrasi.</p>
+      </div>
+     </section>
+
+     <!-- QR Attendance View -->
+     <section id="qr-attendance-view" class="view">
+      <div class="panel">
+       <div class="flex justify-between gap-3 flex-wrap mb-4">
+        <div>
+         <h2 class="panel-title">Absensi Scan QR Code Jemaat</h2>
+         <p class="panel-sub">Arahkan kamera ke QR Code anggota untuk mencatat kehadiran.</p>
+        </div>
+       </div>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div class="card bg-slate-900 text-white p-4">
+         <h3 class="font-bold mb-3 text-amber-400 text-sm">Kamera Scanner</h3>
+         <div id="reader" style="width: 100%; border-radius: 8px; overflow: hidden;"></div>
+         <button type="button" onclick="initScanner()" class="primary mt-3 text-xs">Aktifkan Kamera</button>
+        </div>
+        <div class="card bg-white p-4">
+         <h3 class="font-bold text-slate-800 mb-2 text-sm">Hasil Scan Terakhir</h3>
+         <div id="scan-result-box" class="p-4 bg-slate-100 rounded-lg text-sm text-slate-700 min-h-[120px] flex flex-col justify-center items-center text-center">
+           <i data-lucide="scan-line" class="w-10 h-10 text-slate-400 mb-2"></i>
+           <span>Belum ada QR yang dipindai. Silakan arahkan kamera ke QR anggota.</span>
+         </div>
+         <div class="mt-4">
+           <label class="block text-xs font-bold text-slate-600 mb-1">Jenis Ibadah / Kehadiran</label>
+           <select id="qr-attendance-service" class="field">
+             <option>KU 1</option><option>KU 2</option><option>Persekutuan Doa</option><option>Komisi Remaja</option><option>Komisi Sekolah Minggu</option>
+           </select>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+
+     <!-- Attendance View -->
+     <section id="attendance-view" class="view">
+      <div class="panel">
+       <div class="flex justify-between gap-3 flex-wrap">
+        <div>
+         <h2 class="panel-title">Kehadiran Jemaat</h2>
+         <p class="panel-sub">Catat kehadiran pelayanan berdasarkan komisi dan kegiatan.</p>
+        </div>
+       </div>
+       <div class="table-wrap mt-4">
+        <table class="data-table">
+         <thead>
+          <tr>
+           <th>Tanggal</th>
+           <th>Nama Anggota</th>
+           <th>Layanan / Kegiatan</th>
+           <th>Waktu Scan</th>
+          </tr>
+         </thead>
+         <tbody id="attendance-list-body"></tbody>
+        </table>
+       </div>
+       <p id="attendance-empty" class="empty hidden">Belum ada catatan kehadiran.</p>
       </div>
      </section>
 
@@ -187,34 +320,257 @@
        <div class="flex justify-between gap-3 flex-wrap items-center">
         <div>
          <h2 class="panel-title">Kunjungan Jemaat</h2>
-         <p class="panel-sub">Data Kunjungan Pastoral.</p>
+         <p class="panel-sub">Catat dan pantau tindak lanjut pelayanan kunjungan pastoral jemaat.</p>
         </div>
         <button onclick="openVisitModal()" class="primary" type="button" style="width: auto;">
           <i data-lucide="plus" class="w-4 h-4"></i><span>Catat Kunjungan Baru</span>
         </button>
        </div>
       </div>
+
+      <!-- Recap Section -->
+      <div class="panel mb-6">
+       <div class="flex justify-between gap-3 flex-wrap items-center border-b pb-3 mb-4">
+        <div>
+         <h3 class="font-bold text-slate-800 text-base">Rekapitulasi Kunjungan Bulanan</h3>
+         <p class="panel-sub">Daftar nama anggota yang dikunjungi pada periode yang dipilih.</p>
+        </div>
+        <div class="flex gap-2">
+         <select id="recap-month" class="field" style="width: auto;" onchange="renderVisits()">
+          <option value="0">Januari</option>
+          <option value="1">Februari</option>
+          <option value="2">Maret</option>
+          <option value="3">April</option>
+          <option value="4">Mei</option>
+          <option value="5">Juni</option>
+          <option value="6">Juli</option>
+          <option value="7">Agustus</option>
+          <option value="8">September</option>
+          <option value="9">Oktober</option>
+          <option value="10">November</option>
+          <option value="11">Desember</option>
+         </select>
+         <select id="recap-year" class="field" style="width: auto;" onchange="renderVisits()"></select>
+        </div>
+       </div>
+
+       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div class="p-3 bg-slate-50 border rounded-lg text-center">
+         <p class="text-xs text-slate-500 font-medium">Total Kunjungan Bulan Ini</p>
+         <strong id="recap-count" class="text-2xl text-slate-800 block mt-1">0</strong>
+        </div>
+        <div class="p-3 bg-slate-50 border rounded-lg text-center">
+         <p class="text-xs text-slate-500 font-medium">Jumlah Anggota Dikunjungi</p>
+         <strong id="recap-unique-members" class="text-2xl text-amber-600 block mt-1">0</strong>
+        </div>
+        <div class="p-3 bg-slate-50 border rounded-lg text-center">
+         <p class="text-xs text-slate-500 font-medium">Status Perlu Tindak Lanjut</p>
+         <strong id="recap-followup-count" class="text-2xl text-red-600 block mt-1">0</strong>
+        </div>
+       </div>
+
+       <div class="table-wrap">
+        <table class="data-table">
+         <thead>
+          <tr>
+           <th>Nama Anggota</th>
+           <th>Tanggal Kunjungan</th>
+           <th>Tim / Pelayan</th>
+           <th>Tujuan Kunjungan</th>
+           <th>Pokok Doa / Catatan</th>
+           <th>Status</th>
+           <th>Aksi</th>
+          </tr>
+         </thead>
+         <tbody id="visit-recap-body"></tbody>
+        </table>
+       </div>
+       <p id="visit-recap-empty" class="empty hidden">Tidak ada data kunjungan pada bulan dan tahun yang dipilih.</p>
+      </div>
+     </section>
+
+     <!-- Reports View (Fitur Rekap Mingguan/Bulanan/Tahunan & Export) -->
+     <section id="reports-view" class="view">
+      <div class="panel mb-4">
+       <h2 class="panel-title">Laporan Administrasi & Rekapitulasi</h2>
+       <p class="panel-sub">Filter data rekapitulasi secara Mingguan, Bulanan, atau Tahunan lalu unduh laporan.</p>
+       
+       <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mt-4">
+        <div>
+         <label class="block text-xs font-bold text-slate-600 mb-1">Pilih Kategori Data</label>
+         <select id="rpt-category" class="field" onchange="generateReport()">
+          <option value="attendance">Kehadiran / Absensi</option>
+          <option value="visits">Kunjungan Pastoral</option>
+          <option value="members">Database Anggota</option>
+         </select>
+        </div>
+        <div>
+         <label class="block text-xs font-bold text-slate-600 mb-1">Periode Rekap</label>
+         <select id="rpt-period" class="field" onchange="toggleReportFilters(); generateReport();">
+          <option value="weekly">Mingguan</option>
+          <option value="monthly" selected>Bulanan</option>
+          <option value="yearly">Tahunan</option>
+         </select>
+        </div>
+        <div id="rpt-filter-date" class="hidden">
+         <label class="block text-xs font-bold text-slate-600 mb-1">Tanggal Mulai (Minggu)</label>
+         <input type="date" id="rpt-start-date" class="field" onchange="generateReport()">
+        </div>
+        <div id="rpt-filter-month">
+         <label class="block text-xs font-bold text-slate-600 mb-1">Bulan & Tahun</label>
+         <div class="flex gap-1">
+          <select id="rpt-month" class="field" onchange="generateReport()"></select>
+          <select id="rpt-year" class="field" onchange="generateReport()"></select>
+         </div>
+        </div>
+       </div>
+
+       <div class="flex gap-2 mt-4 pt-3 border-t">
+        <button onclick="exportReport('excel')" class="secondary" style="width:auto; padding:7px 14px; font-size:12px;"><i data-lucide="file-spreadsheet" class="w-4 h-4 text-green-600"></i> Unduh Excel (.csv)</button>
+        <button onclick="exportReport('pdf')" class="secondary" style="width:auto; padding:7px 14px; font-size:12px;"><i data-lucide="file-text" class="w-4 h-4 text-red-600"></i> Unduh PDF</button>
+        <button onclick="exportReport('word')" class="secondary" style="width:auto; padding:7px 14px; font-size:12px;"><i data-lucide="file-code" class="w-4 h-4 text-blue-600"></i> Unduh Word (.doc)</button>
+       </div>
+      </div>
+
+      <div class="panel">
+       <div id="report-print-area">
+        <div class="text-center mb-4 border-b pb-2">
+         <h3 id="rpt-header-title" class="font-bold text-lg text-slate-800 m-0">Laporan Kehadiran Jemaat</h3>
+         <p id="rpt-header-sub" class="text-xs text-slate-500 m-0">Periode: September 2026</p>
+        </div>
+        <div class="table-wrap">
+         <table class="data-table" id="report-table">
+          <thead id="report-table-head"></thead>
+          <tbody id="report-table-body"></tbody>
+         </table>
+        </div>
+       </div>
+      </div>
+     </section>
+
+     <!-- Settings View -->
+     <section id="settings-view" class="view">
+      <div class="settings-head flex justify-between items-center mb-4">
+       <div>
+        <h2 class="page-title" style="font-size: 22px;">Pengaturan</h2>
+       </div>
+      </div>
+      <div class="panel">
+       <h2 class="panel-title">Profil Gereja</h2>
+       <form id="church-form" class="mt-4 space-y-3" onsubmit="saveChurchProfile(event)">
+        <div class="form-grid">
+         <div class="form-group"><label>Nama Gereja</label> <input id="church-short-name" class="field" value="GKY" required></div>
+         <div class="form-group"><label>Nama Lengkap</label> <input id="church-full-name" class="field" value="Gereja Kristus Yesus Singkawang"></div>
+        </div>
+        <div class="flex justify-end"><button type="submit" class="primary" style="width:auto; padding:8px 16px;">Simpan Profil</button></div>
+       </form>
+      </div>
      </section>
     </main>
    </div>
   </div>
 
-  <!-- Modal Tambah Anggota (Dilengkapi bagian bawah yang sempat terpotong) -->
+  <!-- Modal Input Kunjungan -->
+  <div id="visit-modal" class="modal-layer" role="dialog">
+   <div class="modal">
+    <div class="modal-head">
+     <div>
+      <h2 id="modal-visit-title" class="serif text-xl m-0 font-bold text-slate-800">Catat Kunjungan Jemaat</h2>
+      <p class="panel-sub">Input data laporan setelah melayani kunjungan pastoral.</p>
+     </div>
+     <button class="close" onclick="closeModal('visit-modal')" type="button"><i data-lucide="x" class="w-4 h-4"></i></button>
+    </div>
+    <form id="visit-form" onsubmit="handleSaveVisit(event)">
+     <div class="form-grid">
+      <div class="form-group full">
+       <label>Nama Anggota Jemaat</label>
+       <select id="v-member-name" class="field" required>
+        <option value="">-- Pilih Anggota --</option>
+       </select>
+      </div>
+      <div class="form-group">
+       <label>Tanggal Kunjungan</label>
+       <input id="v-date" class="field" type="date" required>
+      </div>
+      <div class="form-group">
+       <label>Tim / Pelayan Kunjungan</label>
+       <input id="v-visitor" class="field" placeholder="Contoh: Pdt. Yohanes & Tim" required>
+      </div>
+      <div class="form-group">
+       <label>Tujuan / Kategori</label>
+       <select id="v-purpose" class="field">
+        <option value="Pastoral / Rutin">Pastoral / Rutin</option>
+        <option value="Penguatan / Duka">Penguatan / Duka</option>
+        <option value="Pergumulan / Sakit">Pergumulan / Sakit</option>
+        <option value="Jemaat Baru">Jemaat Baru</option>
+        <option value="Lainnya">Lainnya</option>
+       </select>
+      </div>
+      <div class="form-group">
+       <label>Status Tindak Lanjut</label>
+       <select id="v-status" class="field">
+        <option value="Selesai">Selesai</option>
+        <option value="Perlu Kunjungan Ulang">Perlu Kunjungan Ulang</option>
+        <option value="Perlu Perhatian Khusus">Perlu Perhatian Khusus</option>
+       </select>
+      </div>
+      <div class="form-group full">
+       <label>Pokok Doa / Catatan Kunjungan</label>
+       <textarea id="v-notes" class="field textarea" placeholder="Tuliskan ringkasan perkunjungan dan pokok doa jemaat..."></textarea>
+      </div>
+     </div>
+     <div class="mt-4 flex justify-end gap-2">
+      <button class="secondary" onclick="closeModal('visit-modal')" type="button" style="width: auto;">Batal</button>
+      <button id="visit-save" class="primary" type="submit" style="width: auto;">Simpan Data Kunjungan</button>
+     </div>
+    </form>
+   </div>
+  </div>
+
+  <!-- Modal QR Code Generator -->
+  <div id="qr-modal" class="modal-layer" role="dialog">
+   <div class="modal text-center">
+    <div class="modal-head">
+     <div>
+      <h2 class="serif text-xl m-0 font-bold text-slate-800">QR Code Anggota</h2>
+      <p class="panel-sub">Gunakan QR ini untuk keperluan absen jemaat.</p>
+     </div>
+     <button class="close" onclick="closeModal('qr-modal')" type="button"><i data-lucide="x" class="w-4 h-4"></i></button>
+    </div>
+    <div class="py-2 flex flex-col items-center justify-center">
+      <div id="qrcode-container" class="p-3 bg-white border rounded-xl shadow inline-block"></div>
+      <h3 id="qr-member-name" class="font-bold text-base mt-3 text-slate-800"></h3>
+      <p id="qr-member-details" class="text-xs text-slate-500 mt-1"></p>
+      
+      <a id="download-qr-btn" class="primary mt-4 py-2 px-4 text-xs font-bold inline-flex items-center justify-center gap-2" style="width: auto; text-decoration: none;" download="qrcode-jemaat.png">
+        <i data-lucide="download" class="w-4 h-4"></i> Download Gambar QR
+      </a>
+    </div>
+    <div class="mt-4 flex justify-end">
+     <button class="secondary" onclick="closeModal('qr-modal')" type="button" style="width: auto;">Tutup</button>
+    </div>
+   </div>
+  </div>
+
+  <!-- Modal Tambah / Edit Anggota -->
   <div id="member-modal" class="modal-layer" role="dialog">
    <div class="modal">
     <div class="modal-head">
      <div>
       <h2 id="modal-member-title" class="serif text-xl m-0 font-bold text-slate-800">Tambah Anggota Jemaat</h2>
-      <p class="panel-sub">Lengkapi data anggota.</p>
+      <p class="panel-sub">Lengkapi data anggota untuk pengelompokan pelayanan.</p>
      </div>
      <button class="close" onclick="closeModal('member-modal')" type="button"><i data-lucide="x" class="w-4 h-4"></i></button>
     </div>
     <form id="member-form" onsubmit="handleSaveMember(event)">
      <div class="form-grid">
       <div class="form-group"><label>Nama Lengkap</label><input id="m-name" class="field" required placeholder="Masukkan nama lengkap"></div>
-      <div class="form-group"><label>Komisi</label><input id="m-commission" class="field" placeholder="Komisi Pelayanan" required></div>
+      <div class="form-group"><label>Komisi</label><select id="m-commission" class="field" required></select></div>
+      <div class="form-group"><label>Tempat Lahir</label><input id="m-pob" class="field" placeholder="Contoh: Singkawang"></div>
+      <div class="form-group"><label>Tanggal Lahir</label><input id="m-dob" class="field" type="date"></div>
       <div class="form-group"><label>Nomor Telepon</label><input id="m-phone" class="field" type="tel" placeholder="08xxxxxxxxxx"></div>
-      <div class="form-group full"><label>Alamat Lengkap</label><textarea id="m-address" class="field textarea" placeholder="Alamat rumah..."></textarea></div>
+      <div class="form-group"><label>Status Keanggotaan</label><select id="m-status" class="field"><option value="Aktif">Aktif</option><option value="Tidak Aktif">Tidak Aktif</option></select></div>
+      <div class="form-group full"><label>Alamat</label><textarea id="m-address" class="field textarea" placeholder="Alamat rumah jemaat"></textarea></div>
      </div>
      <div class="mt-4 flex justify-end gap-2">
       <button class="secondary" onclick="closeModal('member-modal')" type="button" style="width: auto;">Batal</button>
@@ -224,124 +580,503 @@
    </div>
   </div>
 
-  <div id="toast" class="toast">Berhasil menyimpan data ke Google Sheets!</div>
+  <div id="toast" class="toast" role="status">
+   <i data-lucide="check-circle" class="w-4 h-4"></i><span id="toast-msg" style="color: #fff; font-weight: 700;">Perubahan berhasil disimpan.</span>
+  </div>
 
-  <!-- Skrip Integrasi SheetDB -->
   <script>
-    const SHEETDB_URL = 'https://sheetdb.io/api/v1/zbulood5cnxxx';
+    const $ = id => document.getElementById(id);
+    const DEFAULT_COMMISSIONS = ["Anggota Jemaat","Komisi Remaja","Komisi Sekolah Minggu","Komisi Alpha Course","Komisi Wanita"];
+    
+    // Inisialisasi Data Default
+    let records = JSON.parse(localStorage.getItem('gky_records')) || [
+      { __backendId: 'm1', record_type: 'member', name: 'Budi Santoso', commission: 'Anggota Jemaat', pob: 'Singkawang', dob: '1988-05-12', phone: '08123456789', status: 'Aktif', address: 'Jl. Diponegoro No. 12' },
+      { __backendId: 'm2', record_type: 'member', name: 'Siti Rahma', commission: 'Komisi Wanita', pob: 'Singkawang', dob: '1992-08-20', phone: '08987654321', status: 'Aktif', address: 'Jl. Pasiran No. 45' }
+    ];
 
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3000);
+    let editingRecord = null;
+    let editingVisitRecord = null;
+    let html5QrcodeScanner = null;
+
+    const saveData = () => {
+      localStorage.setItem('gky_records', JSON.stringify(records));
+      renderAll();
+    };
+
+    const members = () => records.filter(r => r.record_type === "member");
+    const attendances = () => records.filter(r => r.record_type === "attendance");
+    const visits = () => records.filter(r => r.record_type === "visit");
+
+    // Navigasi & Auth
+    function switchAuthTab(type) {
+      if(type === 'login') {
+        $('login-form').classList.remove('hidden');
+        $('register-form').classList.add('hidden');
+        $('tab-login-btn').className = "flex-1 py-1.5 text-xs font-bold rounded bg-amber-500 text-slate-900 transition";
+        $('tab-register-btn').className = "flex-1 py-1.5 text-xs font-bold rounded bg-slate-700 text-white transition";
+      } else {
+        $('login-form').classList.add('hidden');
+        $('register-form').classList.remove('hidden');
+        $('tab-login-btn').className = "flex-1 py-1.5 text-xs font-bold rounded bg-slate-700 text-white transition";
+        $('tab-register-btn').className = "flex-1 py-1.5 text-xs font-bold rounded bg-amber-500 text-slate-900 transition";
+      }
     }
 
     function handleLogin(e) {
       e.preventDefault();
-      document.getElementById('welcome').style.display = 'none';
-      document.getElementById('dashboard').classList.add('active');
-      loadMembers();
-      lucide.createIcons();
+      $('welcome').style.display = 'none';
+      $('dashboard').classList.add('active');
+      showToast('Berhasil masuk ke sistem');
+      renderAll();
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      showToast('Akun berhasil dibuat, silakan login!');
+      switchAuthTab('login');
     }
 
     function handleLogout() {
-      document.getElementById('dashboard').classList.remove('active');
-      document.getElementById('welcome').style.display = 'flex';
+      $('dashboard').classList.remove('active');
+      $('welcome').style.display = 'flex';
+      showToast('Anda telah keluar');
     }
 
+    function toggleSidebar() {
+      $('sidebar').classList.toggle('open');
+    }
+
+    // Modal Manager
+    function openModal(id) { $(id).classList.add('show'); }
+    function closeModal(id) { $(id).classList.remove('show'); }
+
+    function showToast(msg) {
+      $('toast-msg').innerText = msg;
+      $('toast').classList.add('show');
+      setTimeout(() => $('toast').classList.remove('show'), 3000);
+    }
+
+    // Members Management
     function openAddMemberModal() {
-      document.getElementById('member-modal').classList.add('show');
+      editingRecord = null;
+      $('modal-member-title').innerText = 'Tambah Anggota Jemaat';
+      $('member-form').reset();
+      openModal('member-modal');
     }
 
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('show');
+    function openEditMemberModal(id) {
+      editingRecord = records.find(r => r.__backendId === id);
+      if(!editingRecord) return;
+      $('modal-member-title').innerText = 'Edit Anggota Jemaat';
+      $('m-name').value = editingRecord.name || '';
+      $('m-commission').value = editingRecord.commission || DEFAULT_COMMISSIONS[0];
+      $('m-pob').value = editingRecord.pob || '';
+      $('m-dob').value = editingRecord.dob || '';
+      $('m-phone').value = editingRecord.phone || '';
+      $('m-status').value = editingRecord.status || 'Aktif';
+      $('m-address').value = editingRecord.address || '';
+      openModal('member-modal');
     }
 
-    // Mengambil Data dari SheetDB
-    async function loadMembers() {
-      try {
-        let res = await fetch(SHEETDB_URL);
-        let data = await res.json();
-        
-        let tbody = document.getElementById('member-body');
-        tbody.innerHTML = '';
-        
-        if(Array.isArray(data)) {
-          data.forEach((row, index) => {
-            tbody.innerHTML += `
-              <tr>
-                <td>${row.name || '-'}</td>
-                <td>${row.commission || '-'}</td>
-                <td>${row.phone || '-'}</td>
-                <td>${row.address || '-'}</td>
-                <td><button class="text-red-600 font-bold" onclick="deleteMember('${row.id || index}')">Hapus</button></td>
-              </tr>
-            `;
-          });
-          document.getElementById('metric-members').textContent = data.length;
-        }
-      } catch (err) {
-        console.error("Gagal memuat data dari SheetDB", err);
-      }
-    }
-
-    // Menyimpan Data ke SheetDB via POST
-    async function handleSaveMember(e) {
+    function handleSaveMember(e) {
       e.preventDefault();
-      let newMember = {
-        id: Date.now().toString(),
-        name: document.getElementById('m-name').value,
-        commission: document.getElementById('m-commission').value,
-        phone: document.getElementById('m-phone').value,
-        address: document.getElementById('m-address').value
+      const data = {
+        record_type: 'member',
+        name: $('m-name').value,
+        commission: $('m-commission').value,
+        pob: $('m-pob').value,
+        dob: $('m-dob').value,
+        phone: $('m-phone').value,
+        status: $('m-status').value,
+        address: $('m-address').value
       };
 
-      try {
-        let res = await fetch(SHEETDB_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ data: [newMember] })
-        });
-        
-        if(res.ok) {
-          showToast('Data berhasil disimpan ke Google Sheets!');
-          closeModal('member-modal');
-          document.getElementById('member-form').reset();
-          loadMembers();
-        } else {
-          alert('Gagal menyimpan ke SheetDB.');
-        }
-      } catch (err) {
-        console.error(err);
-        alertTerjadiKesalahan();
+      if(editingRecord) {
+        Object.assign(editingRecord, data);
+      } else {
+        data.__backendId = Date.now().toString();
+        records.push(data);
+      }
+      saveData();
+      closeModal('member-modal');
+      showToast('Data anggota berhasil disimpan');
+    }
+
+    function deleteMember(id) {
+      if(confirm('Apakah Anda yakin ingin menghapus anggota ini?')) {
+        records = records.filter(r => r.__backendId !== id);
+        saveData();
+        showToast('Anggota berhasil dihapus');
       }
     }
 
-    async function deleteMember(id) {
-      if(!confirm('Hapus data ini?')) return;
-      try {
-        let res = await fetch(`${SHEETDB_URL}/id/${id}`, {
-          method: 'DELETE'
-        });
-        if(res.ok) {
-          showToast('Data berhasil dihapus.');
-          loadMembers();
-        }
-      } catch(err) {
-        console.error(err);
-      }
-    }
-
-    // Navigasi View Sederhana
-    document.querySelectorAll('.nav-link[data-view]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        btn.classList.add('active');
-        let target = document.getElementById(btn.getAttribute('data-view'));
-        if(target) target.classList.add('active');
+    // QR Generator Modal
+    function showMemberQR(id) {
+      const m = records.find(r => r.__backendId === id);
+      if(!m) return;
+      $('qr-member-name').innerText = m.name;
+      $('qr-member-details').innerText = `${m.commission} • ${m.phone || 'No Telp (-)'}`;
+      $('qrcode-container').innerHTML = '';
+      
+      const qrcode = new QRCode($('qrcode-container'), {
+        text: m.__backendId,
+        width: 160,
+        height: 160
       });
+
+      setTimeout(() => {
+        const img = $('qrcode-container').querySelector('img');
+        if(img) $('download-qr-btn').href = img.src;
+      }, 300);
+
+      openModal('qr-modal');
+    }
+
+    // Visits Management
+    function openVisitModal() {
+      editingVisitRecord = null;
+      $('visit-form').reset();
+      populateVisitMemberSelect();
+      openModal('visit-modal');
+    }
+
+    function populateVisitMemberSelect() {
+      const sel = $('v-member-name');
+      sel.innerHTML = '<option value="">-- Pilih Anggota --</option>';
+      members().forEach(m => {
+        sel.innerHTML += `<option value="${m.name}">${m.name} (${m.commission})</option>`;
+      });
+    }
+
+    function handleSaveVisit(e) {
+      e.preventDefault();
+      const data = {
+        record_type: 'visit',
+        member_name: $('v-member-name').value,
+        date: $('v-date').value,
+        visitor: $('v-visitor').value,
+        purpose: $('v-purpose').value,
+        status: $('v-status').value,
+        notes: $('v-notes').value
+      };
+
+      if(editingVisitRecord) {
+        Object.assign(editingVisitRecord, data);
+      } else {
+        data.__backendId = Date.now().toString();
+        records.push(data);
+      }
+      saveData();
+      closeModal('visit-modal');
+      showToast('Kunjungan berhasil dicatat');
+    }
+
+    function deleteVisit(id) {
+      if(confirm('Hapus catatan kunjungan ini?')) {
+        records = records.filter(r => r.__backendId !== id);
+        saveData();
+        showToast('Catatan kunjungan dihapus');
+      }
+    }
+
+    // QR Scanner
+    function initScanner() {
+      if(html5QrcodeScanner) return;
+      html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: {width: 250, height: 250} });
+      html5QrcodeScanner.render((decodedText) => {
+        const member = members().find(m => m.__backendId === decodedText);
+        if(member) {
+          const att = {
+            __backendId: Date.now().toString(),
+            record_type: 'attendance',
+            member_id: member.__backendId,
+            member_name: member.name,
+            service: $('qr-attendance-service').value,
+            date: new Date().toISOString().split('T')[0],
+            time: new Date().toLocaleTimeString('id-ID')
+          };
+          records.push(att);
+          saveData();
+          $('scan-result-box').innerHTML = `
+            <div class="text-green-600 font-bold">✓ Absensi Berhasil!</div>
+            <div class="font-bold text-slate-800 text-base">${member.name}</div>
+            <div class="text-xs text-slate-500">${att.service} • ${att.time}</div>
+          `;
+          showToast(`Berhasil absen: ${member.name}`);
+        } else {
+          $('scan-result-box').innerHTML = `<div class="text-red-500 font-bold">QR Code tidak terdaftar!</div>`;
+        }
+      }, (err) => {});
+    }
+
+    // Render Data & Laporan
+    function renderMembers() {
+      const q = ($('member-search').value || '').toLowerCase();
+      const comm = $('member-commission-filter').value;
+      const body = $('member-body');
+      
+      const filtered = members().filter(m => {
+        const matchQ = m.name.toLowerCase().includes(q) || (m.address && m.address.toLowerCase().includes(q));
+        const matchComm = !comm || m.commission === comm;
+        return matchQ && matchComm;
+      });
+
+      body.innerHTML = filtered.map(m => `
+        <tr>
+          <td><strong>${m.name}</strong></td>
+          <td><span class="status">${m.commission}</span></td>
+          <td>${m.pob || '-'}, ${m.dob || '-'}</td>
+          <td>${m.phone || '-'}</td>
+          <td>${m.address || '-'}</td>
+          <td><span class="status" style="background:${m.status==='Aktif'?'#e6f4ea':'#fce8e6'}; color:${m.status==='Aktif'?'#137333':'#c5221f'}">${m.status}</span></td>
+          <td>
+            <button class="link-btn" onclick="showMemberQR('${m.__backendId}')">QR</button>
+            <button class="link-btn" onclick="openEditMemberModal('${m.__backendId}')">Edit</button>
+            <button class="link-btn danger" onclick="deleteMember('${m.__backendId}')">Hapus</button>
+          </td>
+        </tr>
+      `).join('');
+
+      $('member-empty').classList.toggle('hidden', filtered.length > 0);
+    }
+
+    function renderVisits() {
+      const mVal = parseInt($('recap-month').value);
+      const yVal = parseInt($('recap-year').value);
+
+      const filtered = visits().filter(v => {
+        if(!v.date) return false;
+        const d = new Date(v.date);
+        return d.getMonth() === mVal && d.getFullYear() === yVal;
+      });
+
+      $('recap-count').innerText = filtered.length;
+      $('recap-unique-members').innerText = new Set(filtered.map(f => f.member_name)).size;
+      $('recap-followup-count').innerText = filtered.filter(f => f.status !== 'Selesai').length;
+
+      $('visit-recap-body').innerHTML = filtered.map(v => `
+        <tr>
+          <td><strong>${v.member_name}</strong></td>
+          <td>${v.date}</td>
+          <td>${v.visitor}</td>
+          <td>${v.purpose}</td>
+          <td>${v.notes || '-'}</td>
+          <td><span class="status">${v.status}</span></td>
+          <td><button class="link-btn danger" onclick="deleteVisit('${v.__backendId}')">Hapus</button></td>
+        </tr>
+      `).join('');
+
+      $('visit-recap-empty').classList.toggle('hidden', filtered.length > 0);
+    }
+
+    function renderAttendance() {
+      const body = $('attendance-list-body');
+      const atts = attendances();
+      body.innerHTML = atts.map(a => `
+        <tr>
+          <td>${a.date}</td>
+          <td><strong>${a.member_name}</strong></td>
+          <td><span class="status">${a.service}</span></td>
+          <td>${a.time}</td>
+        </tr>
+      `).join('');
+      $('attendance-empty').classList.toggle('hidden', atts.length > 0);
+    }
+
+    // --- FITUR REKAP LAPORAN (Mingguan, Bulanan, Tahunan) & EXPORT ---
+    function toggleReportFilters() {
+      const p = $('rpt-period').value;
+      $('rpt-filter-date').classList.toggle('hidden', p !== 'weekly');
+      $('rpt-filter-month').classList.toggle('hidden', p === 'weekly');
+    }
+
+    function generateReport() {
+      const category = $('rpt-category').value;
+      const period = $('rpt-period').value;
+      const head = $('report-table-head');
+      const body = $('report-table-body');
+      
+      let filteredData = [];
+      let title = "";
+
+      // Logic Filtering Berdasarkan Periode
+      if(category === 'attendance') {
+        title = "Laporan Rekapitulasi Kehadiran Jemaat";
+        filteredData = attendances().filter(a => filterByPeriod(a.date, period));
+      } else if(category === 'visits') {
+        title = "Laporan Rekapitulasi Kunjungan Pastoral";
+        filteredData = visits().filter(v => filterByPeriod(v.date, period));
+      } else {
+        title = "Laporan Database Anggota Jemaat";
+        filteredData = members();
+      }
+
+      $('rpt-header-title').innerText = title;
+      $('rpt-header-sub').innerText = `Tipe Laporan: ${period.toUpperCase()} | Total Data: ${filteredData.length}`;
+
+      // Render Table
+      if(category === 'attendance') {
+        head.innerHTML = `<tr><th>No</th><th>Tanggal</th><th>Nama Jemaat</th><th>Layanan</th><th>Waktu Absen</th></tr>`;
+        body.innerHTML = filteredData.map((d, i) => `
+          <tr><td>${i+1}</td><td>${d.date}</td><td>${d.member_name}</td><td>${d.service}</td><td>${d.time}</td></tr>
+        `).join('');
+      } else if(category === 'visits') {
+        head.innerHTML = `<tr><th>No</th><th>Tanggal</th><th>Nama Jemaat</th><th>Pelayan</th><th>Tujuan</th><th>Status</th></tr>`;
+        body.innerHTML = filteredData.map((d, i) => `
+          <tr><td>${i+1}</td><td>${d.date}</td><td>${d.member_name}</td><td>${d.visitor}</td><td>${d.purpose}</td><td>${d.status}</td></tr>
+        `).join('');
+      } else {
+        head.innerHTML = `<tr><th>No</th><th>Nama Lengkap</th><th>Komisi</th><th>Telepon</th><th>Status</th><th>Alamat</th></tr>`;
+        body.innerHTML = filteredData.map((d, i) => `
+          <tr><td>${i+1}</td><td>${d.name}</td><td>${d.commission}</td><td>${d.phone || '-'}</td><td>${d.status}</td><td>${d.address || '-'}</td></tr>
+        `).join('');
+      }
+    }
+
+    function filterByPeriod(dateStr, period) {
+      if(!dateStr) return false;
+      const d = new Date(dateStr);
+      
+      if(period === 'weekly') {
+        const start = $('rpt-start-date').value ? new Date($('rpt-start-date').value) : new Date(Date.now() - 7*24*60*60*1000);
+        const end = new Date(start);
+        end.setDate(end.getDate() + 7);
+        return d >= start && d <= end;
+      } else if(period === 'monthly') {
+        const m = parseInt($('rpt-month').value);
+        const y = parseInt($('rpt-year').value);
+        return d.getMonth() === m && d.getFullYear() === y;
+      } else if(period === 'yearly') {
+        const y = parseInt($('rpt-year').value);
+        return d.getFullYear() === y;
+      }
+      return true;
+    }
+
+    // Export Laporan (Excel CSV, Word DOC, PDF)
+    function exportReport(type) {
+      const table = $('report-table');
+      const title = $('rpt-header-title').innerText;
+
+      if (type === 'excel') {
+        let csv = [];
+        for (let row of table.rows) {
+          let cols = Array.from(row.cells).map(cell => `"${cell.innerText.replace(/"/g, '""')}"`);
+          csv.push(cols.join(","));
+        }
+        const blob = new Blob([csv.join("\n")], { type: "text/csv;charset=utf-8;" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `${title}.csv`;
+        a.click();
+      } else if (type === 'word') {
+        const html = `
+          <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+          <head><title>${title}</title></head>
+          <body><h2>${title}</h2>${table.outerHTML}</body>
+          </html>`;
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `${title}.doc`;
+        a.click();
+      } else if (type === 'pdf') {
+        const printWin = window.open('', '', 'width=800,height=600');
+        printWin.document.write(`
+          <html><head><title>${title}</title>
+          <style>
+            body{font-family:sans-serif;padding:20px;}
+            table{width:100%;border-collapse:collapse;margin-top:15px;}
+            th,td{border:1px solid #ccc;padding:8px;text-align:left;font-size:12px;}
+            th{background:#f2f2f2;}
+          </style>
+          </head><body>
+          <h2>${title}</h2>
+          <p>${$('rpt-header-sub').innerText}</p>
+          ${table.outerHTML}
+          </body></html>
+        `);
+        printWin.document.close();
+        printWin.focus();
+        printWin.print();
+        printWin.close();
+      }
+    }
+
+    // Init & Populate Filters
+    function setupReportFilters() {
+      const months = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+      const rptM = $('rpt-month');
+      const rptY = $('rpt-year');
+      const recapY = $('recap-year');
+      
+      const currentYear = new Date().getFullYear();
+      const currentMonth = new Date().getMonth();
+
+      rptM.innerHTML = months.map((m, i) => `<option value="${i}" ${i===currentMonth?'selected':''}>${m}</option>`).join('');
+      
+      let yearOpts = '';
+      for(let y = currentYear - 3; y <= currentYear + 2; y++) {
+        yearOpts += `<option value="${y}" ${y===currentYear?'selected':''}>${y}</option>`;
+      }
+      rptY.innerHTML = yearOpts;
+      recapY.innerHTML = yearOpts;
+
+      // Set default start date mingguan
+      const today = new Date();
+      $('rpt-start-date').value = today.toISOString().split('T')[0];
+    }
+
+    function renderAll() {
+      $('metric-members').innerText = members().length;
+      $('metric-commissions').innerText = DEFAULT_COMMISSIONS.length;
+      $('metric-attendance').innerText = attendances().length;
+      $('metric-visits').innerText = visits().length;
+
+      // Render Cards Komisi
+      $('commission-cards').innerHTML = DEFAULT_COMMISSIONS.map(c => {
+        const count = members().filter(m => m.commission === c).length;
+        return `<div class="card bg-slate-50 border text-center p-3"><p class="text-xs text-slate-500 font-bold">${c}</p><strong class="text-xl text-slate-800">${count}</strong></div>`;
+      }).join('');
+
+      renderMembers();
+      renderVisits();
+      renderAttendance();
+      generateReport();
+    }
+
+    // Event Navigation View Switching
+    document.addEventListener('DOMContentLoaded', () => {
+      setupReportFilters();
+
+      // Populate Commission Selects
+      const mComm = $('m-commission');
+      const filterComm = $('member-commission-filter');
+      
+      filterComm.innerHTML = '<option value="">Semua Komisi</option>';
+      DEFAULT_COMMISSIONS.forEach(c => {
+        mComm.innerHTML += `<option value="${c}">${c}</option>`;
+        filterComm.innerHTML += `<option value="${c}">${c}</option>`;
+      });
+
+      document.querySelectorAll('.nav-link[data-view]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+          document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+          
+          btn.classList.add('active');
+          const viewId = btn.getAttribute('data-view');
+          $(viewId).classList.add('active');
+          $('page-heading-title').innerText = btn.querySelector('span').innerText;
+
+          if(window.innerWidth <= 820) $('sidebar').classList.remove('open');
+          
+          if(viewId === 'reports-view') generateReport();
+        });
+      });
+
+      lucide.createIcons();
+      renderAll();
     });
   </script>
 </body>
