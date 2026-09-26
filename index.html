@@ -565,17 +565,7 @@
     <form id="member-form" onsubmit="handleSaveMember(event)">
      <div class="form-grid">
       <div class="form-group"><label>Nama Lengkap</label><input id="m-name" class="field" required placeholder="Masukkan nama lengkap"></div>
-      <div class="form-group">
-        <label>Komisi</label>
-        <select id="m-commission" class="field" required>
-          <option value="Umum">Umum</option>
-          <option value="Anak">Anak</option>
-          <option value="Remaja">Remaja</option>
-          <option value="Pemuda">Pemuda</option>
-          <option value="Dewasa">Dewasa</option>
-          <option value="Lansia">Lansia</option>
-        </select>
-      </div>
+      <div class="form-group"><label>Komisi</label><select id="m-commission" class="field" required></select></div>
       <div class="form-group"><label>Tempat Lahir</label><input id="m-pob" class="field" placeholder="Contoh: Singkawang"></div>
       <div class="form-group"><label>Tanggal Lahir</label><input id="m-dob" class="field" type="date"></div>
       <div class="form-group"><label>Nomor Telepon</label><input id="m-phone" class="field" type="tel" placeholder="08xxxxxxxxxx"></div>
@@ -594,7 +584,7 @@
 
   <!-- Script Integrasi -->
   <script>
-    const SHEETDB_URL = 'https://sheetdb.io/api/v1/7jnpdnjo4ho7r';
+    const SHEETDB_URL = 'https://sheetdb.io/api/v1/zbulood5cnxxx';
 
     function showToast(msg) {
       const t = document.getElementById('toast');
