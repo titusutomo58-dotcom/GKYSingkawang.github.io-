@@ -162,7 +162,6 @@
        <div class="toolbar">
         <input id="member-search" class="field search" type="search" placeholder="Cari nama anggota..." oninput="filterMembers()"> 
         
-        <!-- FIX: Menambahkan Pilihan Filter Komisi -->
         <select id="member-commission-filter" class="field" style="max-width:240px" onchange="filterMembers()">
             <option value="All">-- Semua Komisi --</option>
             <option value="Umum">Umum</option>
@@ -213,22 +212,26 @@
    </div>
   </div>
 
-  <!-- MODAL: Tambah Anggota -->
+  <!-- MODAL: Tambah Anggota (YANG SUDAH DIPERBAIKI) -->
   <div id="member-modal" class="modal-layer">
    <div class="modal">
     <div class="modal-head">
      <h2 class="font-bold text-xl text-slate-800">Tambah Anggota Jemaat</h2>
-     <button class="close" onclick="closeModal('member-modal')"><i data-lucide="x" class="w-4 h-4"></i></button>
+     <button class="close" onclick="closeModal('member-modal')" type="button"><i data-lucide="x" class="w-4 h-4"></i></button>
     </div>
+    
     <form id="member-form" onsubmit="handleSaveMember(event)">
      <div class="form-grid">
-      <div class="form-group"><label>Nama Lengkap</label><input id="m-name" class="field" required placeholder="Masukkan nama"></div>
+      <div class="form-group full">
+        <label>Nama Lengkap</label>
+        <input id="m-name" class="field" required placeholder="Masukkan nama lengkap">
+      </div>
       
-      <!-- FIX: Menambahkan Pilihan Komisi di Form Tambah Anggota -->
-      <div class="form-group">
-        <label>Komisi / Kategori</label>
+      <!-- PERBAIKAN: Dropdown Komisi -->
+      <div class="form-group full">
+        <label>Komisi / Kategori Pelayanan</label>
         <select id="m-commission" class="field" required>
-            <option value="">-- Pilih Komisi --</option>
+            <option value="" disabled selected>-- Pilih Komisi --</option>
             <option value="Umum">Umum</option>
             <option value="Sekolah Minggu">Anak / Sekolah Minggu</option>
             <option value="Remaja">Remaja</option>
@@ -239,12 +242,31 @@
         </select>
       </div>
       
-      <div class="form-group"><label>Tempat Lahir</label><input id="m-pob" class="field" placeholder="Contoh: Singkawang"></div>
-      <div class="form-group"><label>Tanggal Lahir</label><input id="m-dob" class="field" type="date"></div>
-      <div class="form-group"><label>Nomor Telepon</label><input id="m-phone" class="field" type="tel" placeholder="08xxxxxxxxxx"></div>
-      <div class="form-group"><label>Status</label><select id="m-status" class="field"><option value="Aktif">Aktif</option><option value="Tidak Aktif">Tidak Aktif</option></select></div>
-      <div class="form-group full"><label>Alamat Lengkap</label><textarea id="m-address" class="field textarea" placeholder="Alamat rumah..."></textarea></div>
+      <div class="form-group">
+        <label>Tempat Lahir</label>
+        <input id="m-pob" class="field" placeholder="Contoh: Singkawang">
+      </div>
+      <div class="form-group">
+        <label>Tanggal Lahir</label>
+        <input id="m-dob" class="field" type="date">
+      </div>
+      <div class="form-group">
+        <label>Nomor Telepon</label>
+        <input id="m-phone" class="field" type="tel" placeholder="08xxxxxxxxxx">
+      </div>
+      <div class="form-group">
+        <label>Status Keanggotaan</label>
+        <select id="m-status" class="field">
+            <option value="Aktif">Aktif</option>
+            <option value="Tidak Aktif">Tidak Aktif</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Alamat Lengkap</label>
+        <textarea id="m-address" class="field textarea" placeholder="Tuliskan alamat domisili..."></textarea>
+      </div>
      </div>
+     
      <div class="mt-4 flex justify-end gap-2">
       <button class="secondary" onclick="closeModal('member-modal')" type="button" style="width: auto;">Batal</button>
       <button class="primary" type="submit" id="btn-save-member" style="width: auto;">Simpan Data</button>
@@ -262,7 +284,6 @@
     </div>
     <form>
      <div class="form-grid">
-      <!-- FIX: Dropdown Nama Anggota otomatis diisi dari Database -->
       <div class="form-group full">
        <label>Pilih Anggota Jemaat</label>
        <select id="v-member-name" class="field" required>
@@ -287,10 +308,8 @@
     lucide.createIcons();
     const SHEETDB_URL = 'https://sheetdb.io/api/v1/zbulood5cnxxx';
     
-    // Variabel Global untuk menyimpan data agar bisa difilter tanpa request ulang
     let allMembers = [];
 
-    // Tampilkan Toast Notifikasi
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
@@ -298,28 +317,24 @@
       setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // Fungsi Login (Presentasi)
     function handleLogin(e) {
       e.preventDefault();
       document.getElementById('welcome').style.display = 'none';
       document.getElementById('dashboard').classList.add('active');
-      loadMembers(); // Mulai load data dari DB setelah login
+      loadMembers(); 
     }
 
-    // Fungsi Logout
     function handleLogout() {
       document.getElementById('dashboard').classList.remove('active');
       document.getElementById('welcome').style.display = 'flex';
     }
 
-    // Modal Controller
     function openAddMemberModal() {
       document.getElementById('member-form').reset();
       document.getElementById('member-modal').classList.add('show');
     }
     
     function openVisitModal() {
-      // FIX: Otomatis mengisi pilihan anggota dari database ke dropdown kunjungan
       let selectVisit = document.getElementById('v-member-name');
       selectVisit.innerHTML = '<option value="">-- Pilih Anggota --</option>';
       
@@ -337,14 +352,13 @@
       document.getElementById(id).classList.remove('show');
     }
 
-    // Fetch Data dari SheetDB
     async function loadMembers() {
       try {
         let res = await fetch(SHEETDB_URL);
         let data = await res.json();
         
         allMembers = Array.isArray(data) ? data : [];
-        renderMembers(allMembers); // Render ke HTML
+        renderMembers(allMembers);
         
         document.getElementById('metric-members').textContent = allMembers.length;
       } catch (err) {
@@ -353,7 +367,6 @@
       }
     }
 
-    // Render HTML Tabel
     function renderMembers(dataToRender) {
         let tbody = document.getElementById('member-body');
         tbody.innerHTML = '';
@@ -379,7 +392,6 @@
         });
     }
 
-    // FIX: Fungsi Filter Pencarian & Dropdown Komisi
     function filterMembers() {
        let searchQuery = document.getElementById('member-search').value.toLowerCase();
        let commissionFilter = document.getElementById('member-commission-filter').value;
@@ -394,7 +406,6 @@
        renderMembers(filteredData);
     }
 
-    // Simpan Anggota Baru ke SheetDB
     async function handleSaveMember(e) {
       e.preventDefault();
       
@@ -403,7 +414,7 @@
       btnSubmit.disabled = true;
 
       let newMember = {
-        id: "ID-" + Date.now().toString(), // ID Unik
+        id: "ID-" + Date.now().toString(),
         name: document.getElementById('m-name').value,
         commission: document.getElementById('m-commission').value,
         pob: document.getElementById('m-pob').value,
@@ -423,7 +434,7 @@
         if(res.ok) {
           showToast('Data Anggota berhasil disimpan!');
           closeModal('member-modal');
-          loadMembers(); // Refresh tabel setelah save
+          loadMembers(); 
         } else {
           alert('Gagal menyimpan ke server.');
         }
@@ -436,7 +447,6 @@
       }
     }
 
-    // Hapus Anggota di SheetDB
     async function deleteMember(id) {
       if(!confirm('Apakah Anda yakin ingin menghapus anggota ini?')) return;
       
@@ -445,14 +455,13 @@
         let res = await fetch(`${SHEETDB_URL}/id/${id}`, { method: 'DELETE' });
         if(res.ok) {
           showToast('Data berhasil dihapus.');
-          loadMembers(); // Refresh tabel
+          loadMembers(); 
         }
       } catch(err) {
         console.error(err);
       }
     }
 
-    // Navigasi Antar Menu (Sidebar)
     document.querySelectorAll('.nav-link[data-view]').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
